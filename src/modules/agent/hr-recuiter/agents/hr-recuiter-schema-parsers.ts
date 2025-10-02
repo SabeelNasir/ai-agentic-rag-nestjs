@@ -27,7 +27,7 @@ const employeesSummarySchema = z.array(
       .describe("list of employees with summarized details"),
   }),
 );
-const employeesSummarySchemaParser = StructuredOutputParser.fromZodSchema(employeesSchema);
+const employeesSummarySchemaParser = StructuredOutputParser.fromZodSchema(employeesSummarySchema);
 export type EmployeesSummaryList = z.infer<typeof employeesSummarySchema>;
 
 export { employeesSchemaParser, employeesSummarySchemaParser };

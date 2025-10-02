@@ -5,7 +5,7 @@ import { HrRecuiterGraphState, HrRecuiterGraphStateType } from "./agents/hr-recu
 import { AgentEmployeesList } from "./agents/employees-list.agent";
 import { BaseMessage, HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { ConsoleCallbackHandler } from "@langchain/core/tracers/console";
-import { extractLastAIMessage } from "src/common/utils";
+import { extractLastAIMessage } from "src/common/utils/utils";
 
 @Injectable()
 export class HrRecuiterGraphService implements OnModuleInit {
@@ -30,9 +30,16 @@ export class HrRecuiterGraphService implements OnModuleInit {
   async callModel(prompt: string, sessionId?: string) {
     const llmResp = await this.compiledStateGraph.invoke(
       {
-        messages: [new HumanMessage(prompt)],
+        messages: [
+          new SystemMessage("Always suggest some questions to the user to ask on the basis of given output context. Max 2 only."),
+          new HumanMessage(prompt),
+        ],
       },
-      { recursionLimit: 2, configurable: { thread_id: sessionId }, callbacks: [new ConsoleCallbackHandler()] },
+      {
+        recursionLimit: 25,
+        configurable: { thread_id: sessionId },
+        callbacks: [],
+      },
     );
     return extractLastAIMessage(llmResp.messages as BaseMessage[]);
   }

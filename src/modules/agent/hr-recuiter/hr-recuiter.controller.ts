@@ -16,8 +16,8 @@ export class HrRecuiterController {
   }
 
   @Post(":sessionId")
-  async chatChefSameSession(@Param("sessionId") sessionId: number, @Body() payload: { prompt: string }) {
-    const llmResp = await this.service.callModel(payload.prompt);
+  async chatChefSameSession(@Param("sessionId") sessionId: string, @Body() payload: { prompt: string }) {
+    const llmResp = await this.service.callModel(payload.prompt, sessionId);
     return {
       sessionId,
       response: llmResp,

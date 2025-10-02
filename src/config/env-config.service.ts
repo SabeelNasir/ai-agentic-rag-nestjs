@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { EnvType } from "./env-config-schema.validation";
 
 @Injectable()
 export class EnvConfigService {
@@ -8,6 +8,10 @@ export class EnvConfigService {
 
   getPort() {
     return this.configService.get<number>("PORT");
+  }
+
+  getChatModelType() {
+    return this.configService.get<EnvType["CHAT_MODEL_TYPE"]>("CHAT_MODEL_TYPE");
   }
 
   getGroqApiKey() {
@@ -23,17 +27,20 @@ export class EnvConfigService {
   }
 
   getDatabaseSynchronize() {
-    return this.configService.get<boolean>("DATABASE_SYNCHRONIZE");
+    return this.configService.get<string>("DATABASE_SYNCHRONIZE")!.trim() === "true";
   }
 
-  getDatabaseLogging() {
-    return this.configService.get<boolean>("DATABASE_LOGGING");
+  getDatabaseLogging(): boolean {
+    return this.configService.get<string>("DATABASE_LOGGING")!.trim() === "true";
+  }
+  getDatabaseType(): any {
+    return this.configService.get<string>("DATABASE_TYPE");
   }
   getDatabaseName() {
     return this.configService.get<string>("DATABASE_NAME");
   }
   getDatabaseUser() {
-    return this.configService.get<string>("DATABASE_USER");
+    return this.configService.get<string>("DATABASE_USERNAME");
   }
   getDatabasePassword() {
     return this.configService.get<string>("DATABASE_PASSWORD");
@@ -43,20 +50,6 @@ export class EnvConfigService {
   }
   getDatabasePort() {
     return parseInt(this.configService.get<string>("DATABASE_PORT")!, 10);
-  }
-
-  getTypeOrmConfig(): TypeOrmModuleOptions {
-    return {
-      type: "postgres",
-      host: this.getDatabaseHost(),
-      port: this.getDatabasePort(),
-      username: this.getDatabaseUser(),
-      password: this.getDatabasePassword(),
-      database: this.getDatabaseName(),
-      entities: [__dirname + "/../**/*.entity{.ts,.js}"],
-      synchronize: this.getDatabaseSynchronize(),
-      logging: this.getDatabaseLogging(),
-    };
   }
 
   getWeatherApiKey() {

@@ -4,12 +4,14 @@ import { AppService } from "./app.service";
 import { AgentController } from "./modules/agent/agent.controller";
 import { AgentModule } from "./modules/agent/agent.module";
 import { EnvConfigModule } from "./config/env-config.module";
-import { DatabaseModule } from "./modules/database/datababase.module";
 import { HrRecuiterAgentModule } from "./modules/agent/hr-recuiter/hr-recuiter-agent.module";
+import { ChatModelLogsModule } from "./modules/chat-model-logs/chat-model-logs.module";
+import { ChatModelLogController } from "./modules/chat-model-logs/chat-model-log.controller";
+import { TypeOrmConfigModule } from "./modules/database/typeorm/typeorm-config.module";
 
 @Module({
-  imports: [AgentModule, EnvConfigModule, HrRecuiterAgentModule],
-  controllers: [AppController, AgentController],
+  imports: [TypeOrmConfigModule, AgentModule, EnvConfigModule, HrRecuiterAgentModule, ChatModelLogsModule],
+  controllers: [AppController, AgentController, ChatModelLogController],
   providers: [AppService],
 })
 export class AppModule {}

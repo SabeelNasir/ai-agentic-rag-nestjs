@@ -14,7 +14,7 @@ import { FoodGraphService } from "./food-agent/food-graph.service";
 @Injectable()
 export class AgentService implements OnModuleInit {
   private chatModel: ChatGroq;
-  private agent;
+  private reactAgent;
   private stateGraphAgent;
 
   private systemMessage = [
@@ -35,7 +35,7 @@ export class AgentService implements OnModuleInit {
       apiKey: this.envConfigSvc.getGroqApiKey(),
       model: this.envConfigSvc.getGroqModel()!,
     });
-    this.agent = createReactAgent({
+    this.reactAgent = createReactAgent({
       llm: this.chatModel,
       tools: [WeatherTool],
     });
@@ -72,14 +72,15 @@ export class AgentService implements OnModuleInit {
 
   async callModel(prompt: string) {
     // return this.chatModel.invoke([...this.systemMessage, ["human", prompt]]);
-    // const llmResp = await this.agent.invoke({ messages: [...this.systemMessage, new HumanMessage(prompt)] });
-    // return llmResp.messages[llmResp.messages.length - 1];
+
+    const llmResp = await this.reactAgent.invoke({ messages: [...this.systemMessage, new HumanMessage(prompt)] });
+    return llmResp.messages[llmResp.messages.length - 1];
 
     // const llmResp = await this.stateGraphAgent.invoke({ messages: [...this.systemMessage, new HumanMessage(prompt)] });
     // return llmResp.messages[llmResp.messages.length - 1];
 
     // Start conversation
-    const result = await this.foodGraphService.invoke(prompt);
-    return result.messages[result.messages.length - 1];
+    // const result = await this.foodGraphService.invoke(prompt);
+    // return result.messages[result.messages.length - 1];
   }
 }

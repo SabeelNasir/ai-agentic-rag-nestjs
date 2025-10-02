@@ -9,9 +9,9 @@ export const EmployeesListPrompt = (messages: BaseMessage[]) => {
       `You are a helpful HR Recuiter AI Assistant.
        Job role mentioned in the user prompt, if hasn't yet then ask again nicely.
        As per requested job role, create a list of 10 employees. 
-       Output schema instructions are: {output_schema}
        Current Time: {current_time}
-       Do not include reasoning traces, inner thoughts, or <think> tags in your output. Only return the final answer in plain JSON/text.
+       Do not include reasoning traces, inner thoughts, or <think> tags in your output. 
+       Only return the final answer in markup.
         `,
     ],
     new MessagesPlaceholder("messages"),
@@ -19,6 +19,6 @@ export const EmployeesListPrompt = (messages: BaseMessage[]) => {
   return prompt.formatMessages({
     current_time: new Date().toISOString(),
     messages,
-    output_schema: employeesSchemaParser.getFormatInstructions(),
+    // output_schema: employeesSchemaParser.getFormatInstructions(),
   });
 };

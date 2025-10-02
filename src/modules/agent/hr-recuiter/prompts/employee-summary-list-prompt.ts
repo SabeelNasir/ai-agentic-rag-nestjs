@@ -7,9 +7,9 @@ export const EmployeesSummaryListPrompt = (messages: BaseMessage[]) => {
     [
       "system",
       `You are a helpful AI Assistant to summarize the employee details in a one line for all given list of employees.
-       Output schema instructions are: {output_schema}
        Current Time: {current_time}
-       Do not include reasoning traces, inner thoughts, or <think> tags in your output. Only return the final answer in plain JSON/text.
+       Do not include reasoning traces, inner thoughts, or <think> tags in your output. 
+       Only return the final answer in markup.
         `,
     ],
     new MessagesPlaceholder("messages"),
@@ -17,6 +17,6 @@ export const EmployeesSummaryListPrompt = (messages: BaseMessage[]) => {
   return prompt.formatMessages({
     current_time: new Date().toISOString(),
     messages,
-    output_schema: employeesSummarySchemaParser.getFormatInstructions(),
+    // output_schema: employeesSummarySchemaParser.getFormatInstructions(),
   });
 };
