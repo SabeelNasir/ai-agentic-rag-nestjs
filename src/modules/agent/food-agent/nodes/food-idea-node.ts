@@ -1,7 +1,8 @@
 import { ChatGroq } from "@langchain/groq";
 import { FoodGraphStateType } from "../state/food-graph-state";
+import { ChatOpenAI } from "@langchain/openai";
 
-export const FoodIdeaNode = (model: ChatGroq) => {
+export const FoodIdeaNode = (model: ChatGroq | ChatOpenAI) => {
   return async (state: FoodGraphStateType) => {
     const resp = await model.invoke([
       ["system", "You are a food recommendation agent."],

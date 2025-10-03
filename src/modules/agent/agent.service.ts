@@ -11,10 +11,11 @@ import { WeatherToolNode } from "./tools/graph-weather-tool";
 import { FoodChefPrompt } from "./prompts/food-chef-prompt";
 import { FoodGraphService } from "./food-agent/food-graph.service";
 import { GroqChatModelService } from "src/common/chat-models/groq-chat-model/groq-chat-model.service";
+import { ChatOpenAI } from "@langchain/openai";
 
 @Injectable()
 export class AgentService implements OnModuleInit {
-  private chatModel: ChatGroq;
+  private chatModel: ChatGroq | ChatOpenAI;
   private reactAgent;
   private stateGraphAgent;
 

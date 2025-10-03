@@ -4,6 +4,7 @@ import { z } from "zod";
 import { FoodGraphStateType } from "../state/food-graph-state";
 import { AIMessage, HumanMessage } from "@langchain/core/messages";
 import { ChatGroq } from "@langchain/groq";
+import { ChatOpenAI } from "@langchain/openai";
 
 const locationSchema = z.object({
   location: z.string(),
@@ -37,7 +38,7 @@ export const LocationNode = (model: ChatGroq) => {
  * @param model 
  * @returns 
  */
-export const LocationNodev2 = (model: ChatGroq) => {
+export const LocationNodev2 = (model: ChatGroq | ChatOpenAI) => {
   const parser = StructuredOutputParser.fromZodSchema(
     z.object({
       city: z.string().describe("city name which user mentioned"),

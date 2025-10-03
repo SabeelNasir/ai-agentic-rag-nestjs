@@ -31,7 +31,9 @@ export class HrRecuiterGraphService implements OnModuleInit {
     const llmResp = await this.compiledStateGraph.invoke(
       {
         messages: [
-          new SystemMessage("Always suggest some questions to the user to ask on the basis of given output context. Max 2 only."),
+          new SystemMessage(
+            "Always suggest some questions to the user to ask on the basis of given output context. Max 2 only.",
+          ),
           new HumanMessage(prompt),
         ],
       },

@@ -21,7 +21,7 @@ export class ChatModelLogsQueueService {
   addJob(payload: AIMessage) {
     const respMetadata = payload.response_metadata;
     const transformedPayload: Partial<ChatModelLog> = {
-      model_name: respMetadata.model,
+      model_name: respMetadata.model || respMetadata.model_name,
       model_provider: this.configService.getChatModelType(),
       input_tokens: respMetadata["tokenUsage"]["promptTokens"],
       output_tokens: respMetadata["tokenUsage"]["completionTokens"],

@@ -9,7 +9,8 @@ interface TokenUsage {
 const pricing: Record<string, { input: number; output: number }> = {
   // ---- OpenAI examples ----
   "gpt-4o": { input: 0.0025, output: 0.01 },
-  "gpt-4o-mini": { input: 0.00015, output: 0.0006 },
+  "gpt-4o-2024-08-06": { input: 0.0025, output: 0.01 },
+  "gpt-4o-mini-2024-07-18": { input: 0.00015, output: 0.0006 },
 
   // ---- Groq examples ----
   "qwen/qwen3-32b": { input: 0.000085, output: 0.000347 },
@@ -31,7 +32,7 @@ function computeCostFromMetadata(metadata: Record<string, any>): {
 
   usage.input_tokens = metadata["tokenUsage"]["promptTokens"];
   usage.output_tokens = metadata["tokenUsage"]["completionTokens"];
-  usage.model = metadata.model;
+  usage.model = metadata.model || metadata.model_name;
 
   const price = pricing[usage.model.toLowerCase()];
   if (!price) {

@@ -7,6 +7,7 @@ import { LocationNode, LocationNodev2 } from "./nodes/location-node";
 import { FoodIdeaNode } from "./nodes/food-idea-node";
 import { RecipeNode } from "./nodes/recipe-node";
 import { GroqChatModelService } from "src/common/chat-models/groq-chat-model/groq-chat-model.service";
+import { ChatOpenAI } from "@langchain/openai";
 
 @Injectable()
 export class FoodGraphService implements OnModuleInit {
@@ -15,7 +16,7 @@ export class FoodGraphService implements OnModuleInit {
   constructor(private readonly chatModel: GroqChatModelService) {}
 
   onModuleInit() {
-    const model: ChatGroq = this.chatModel.getModel();
+    const model: ChatGroq | ChatOpenAI = this.chatModel.getModel();
 
     const graph = new StateGraph(GraphState)
       .addNode("welcome", WelcomeNode)
@@ -39,7 +40,7 @@ export class FoodGraphService implements OnModuleInit {
 
   async invoke(userInput: string) {
     return this.agent.invoke({
-      messages: [{ type: "human", content: userInput }]
+      messages: [{ type: "human", content: userInput }],
     });
   }
 }

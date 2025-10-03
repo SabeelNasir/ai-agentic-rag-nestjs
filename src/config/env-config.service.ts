@@ -17,9 +17,15 @@ export class EnvConfigService {
   getGroqApiKey() {
     return this.configService.get<string>("GROQ_API_KEY");
   }
+  getOpenAIApiKey() {
+    return this.configService.get<string>("OPEN_API_KEY");
+  }
 
   getGroqModel() {
     return this.configService.get<string>("GROQ_CHAT_MODEL");
+  }
+  getOpenAIModel() {
+    return this.configService.get<string>("OPENAI_CHAT_MODEL");
   }
 
   getChatModelMaxCompletionTokens() {
