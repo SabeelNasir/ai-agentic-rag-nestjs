@@ -1,0 +1,42 @@
+import { QueueJob } from "@bull-board/api/typings/app";
+import { InjectQueue } from "@nestjs/bull";
+import { Injectable } from "@nestjs/common";
+import { type Queue } from "bull";
+import { ENUM_QUEUES } from "src/common/enums/enums";
+import { queuePool } from "../utils/get-bull-queues";
+import { AIMessage } from "@langchain/core/messages";
+import { EnvConfigService } from "src/config/env-config.service";
+import { computeCostFromMetadata } from "src/common/utils/chat-call-cost-compute";
+import { ChatModelLog } from "src/modules/database/entities/chat-model-log.entity";
+
+@Injectable()
+export class ChatModelLogsQueueService {
+  constructor(
+    @InjectQueue(ENUM_QUEUES.CHAT_MODEL_LOGGING) private queue: Queue,
+    private configService: EnvConfigService,
+  ) {
+    queuePool.add(queue);
+  }
+
+  addJob(payload: AIMessage) {
+    const respMetadata = payload.response_metadata;
+    const transformedPayload: Partial<ChatModelLog> = {
+      model_name: respMetadata.model,
+      model_provider: this.configService.getChatModelType(),
+      input_tokens: respMetadata["tokenUsage"]["promptTokens"],
+      output_tokens: respMetadata["tokenUsage"]["completionTokens"],
+      request_id: ((respMetadata) => {
+        try {
+          return this.configService.getChatModelType() == "groq"
+            ? respMetadata["x_groq"]["id"]
+            : respMetadata["x_openai"]["request_id"];
+        } catch (err) {
+          return null;
+        }
+      })(respMetadata),
+      response_code: 200,
+      cost: computeCostFromMetadata(respMetadata).cost,
+    };
+    return this.queue.add(transformedPayload);
+  }
+}

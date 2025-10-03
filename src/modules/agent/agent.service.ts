@@ -10,6 +10,7 @@ import { GraphState } from "./graph.state";
 import { WeatherToolNode } from "./tools/graph-weather-tool";
 import { FoodChefPrompt } from "./prompts/food-chef-prompt";
 import { FoodGraphService } from "./food-agent/food-graph.service";
+import { GroqChatModelService } from "src/common/chat-models/groq-chat-model/groq-chat-model.service";
 
 @Injectable()
 export class AgentService implements OnModuleInit {
@@ -28,13 +29,11 @@ export class AgentService implements OnModuleInit {
   constructor(
     private envConfigSvc: EnvConfigService,
     private foodGraphService: FoodGraphService,
+    private chatModelService: GroqChatModelService,
   ) {}
 
   onModuleInit() {
-    this.chatModel = new ChatGroq({
-      apiKey: this.envConfigSvc.getGroqApiKey(),
-      model: this.envConfigSvc.getGroqModel()!,
-    });
+    this.chatModel = this.chatModelService.getModel();
     this.reactAgent = createReactAgent({
       llm: this.chatModel,
       tools: [WeatherTool],

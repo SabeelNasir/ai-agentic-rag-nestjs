@@ -1,14 +1,42 @@
 import { BaseCallbackHandler } from "node_modules/@langchain/core/dist/callbacks/base";
 import { computeCostFromMetadata } from "../utils/chat-call-cost-compute";
+import { Serialized } from "@langchain/core/load/serializable";
+import { ChatGeneration, LLMResult } from "@langchain/core/outputs";
+import { Injectable } from "@nestjs/common";
+import { ChatModelLogsQueueService } from "src/microservices/queues/chat-model-logs-queue/chat-model-logs-queue.service";
 
+@Injectable()
 export class DBLoggingHandler extends BaseCallbackHandler {
+  constructor(private queueService: ChatModelLogsQueueService) {
+    super();
+  }
   name = "DBLoggingHandler";
 
-  async onLLMEnd(output, runId, parentRunId, tags) {
-    const metadata = output.generations?.[0]?.[0]?.message?.response_metadata ?? {};
-    const usage = computeCostFromMetadata(metadata);
+  handleLLMStart(
+    llm: Serialized,
+    prompts: string[],
+    runId: string,
+    parentRunId?: string,
+    extraParams?: Record<string, unknown>,
+    tags?: string[],
+    metadata?: Record<string, unknown>,
+    runName?: string,
+  ) {
+    // console.log("ChatModel LLM Start:", metadata);
+  }
+  async handleLLMEnd(
+    output: LLMResult,
+    runId: string,
+    parentRunId?: string,
+    tags?: string[],
+    extraParams?: Record<string, unknown>,
+  ) {
+    console.log("CHatModel LLM End: ", "Output: ", output, runId, "Extra Params", extraParams);
+    const chatGen = output.generations?.[0]?.[0] as ChatGeneration;
+    const metadata = chatGen.message.response_metadata ?? {};
+    // console.log("Metadata", metadata);
 
-    // save usage + metadata into DB
-    console.log("Saving log:", usage);
+    // Push in queue  for saving
+    await this.queueService.addJob(chatGen.message);
   }
 }

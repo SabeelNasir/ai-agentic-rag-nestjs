@@ -14,6 +14,9 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalInterceptors(new ResponseInterceptor());
 
+  //Start microservices
+  app.startAllMicroservices();
+
   await app.listen(process.env.PORT ?? 3000, () => {
     logger.log(`AI Agentic Backend running on port : ${configService.getPort()}`);
   });

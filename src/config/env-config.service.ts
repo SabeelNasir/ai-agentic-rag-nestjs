@@ -52,6 +52,17 @@ export class EnvConfigService {
     return parseInt(this.configService.get<string>("DATABASE_PORT")!, 10);
   }
 
+  // Redis Credentials
+  getRedisHost(): string {
+    return this.configService.get<string>("REDIS_HOST")!;
+  }
+  getRedisPort(): string {
+    return this.configService.get<string>("REDIS_PORT")!;
+  }
+  getRedisPrefix(): string | undefined {
+    return this.configService.get<string>("REDIS_PREFIX");
+  }
+
   getWeatherApiKey() {
     return this.configService.get<string>("WEATHER_API_KEY");
   }

@@ -13,26 +13,26 @@ export class ChatModelLogsService {
     private configService: EnvConfigService,
   ) {}
 
-  save(aiChunkMessage: AIMessageChunk) {
-    let payload: Partial<ChatModelLog> = {};
-    const respMetadata = aiChunkMessage.response_metadata;
-    payload = {
-      model_name: respMetadata.model,
-      model_type: this.configService.getChatModelType(),
-      input_tokens: respMetadata["tokenUsage"]["promptTokens"],
-      output_tokens: respMetadata["tokenUsage"]["completionTokens"],
-      request_id: ((respMetadata) => {
-        try {
-          return this.configService.getChatModelType() == "groq"
-            ? respMetadata["x_groq"]["id"]
-            : respMetadata["x_openai"]["request_id"];
-        } catch (err) {
-          return null;
-        }
-      })(respMetadata),
-      response_code: 200,
-      cost: computeCostFromMetadata(respMetadata).cost,
-    };
+  save(payload: Partial<ChatModelLog>) {
+    // let payload: Partial<ChatModelLog> = {};
+    // const respMetadata = aiChunkMessage;
+    // payload = {
+    //   model_name: respMetadata.mod,
+    //   model_type: this.configService.getChatModelType(),
+    //   input_tokens: respMetadata["tokenUsage"]["promptTokens"],
+    //   output_tokens: respMetadata["tokenUsage"]["completionTokens"],
+    //   request_id: ((respMetadata) => {
+    //     try {
+    //       return this.configService.getChatModelType() == "groq"
+    //         ? respMetadata["x_groq"]["id"]
+    //         : respMetadata["x_openai"]["request_id"];
+    //     } catch (err) {
+    //       return null;
+    //     }
+    //   })(respMetadata),
+    //   response_code: 200,
+    //   cost: computeCostFromMetadata(respMetadata).cost,
+    // };
     return this.repo.upsert(payload, { conflictPaths: { id: true } });
   }
 }

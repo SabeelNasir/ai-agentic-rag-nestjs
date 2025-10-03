@@ -1,8 +1,11 @@
+import { ENUM_CHAT_MODEL_PROVIDER } from "src/common/enums/enums";
 import * as zod from "zod";
 
 export const envValidationSchema = zod.object({
   PORT: zod.string().nonempty(),
-  CHAT_MODEL_TYPE: zod.enum(["groq", "openai"]).describe("ai chat model company type"),
+  CHAT_MODEL_TYPE: zod
+    .enum([ENUM_CHAT_MODEL_PROVIDER.GROQ, ENUM_CHAT_MODEL_PROVIDER.OPENAI])
+    .describe("ai chat model company type"),
   GROQ_API_KEY: zod.string().describe("groq ai api-key").nonempty(),
   GROQ_CHAT_MODEL: zod.string().nonempty(),
   DATABASE_HOST: zod.string().nonempty(),
@@ -12,6 +15,9 @@ export const envValidationSchema = zod.object({
   DATABASE_NAME: zod.string().nonempty(),
   DATABASE_USERNAME: zod.string().nonempty(),
   DATABASE_PASSWORD: zod.string().nonempty(),
+  REDIS_HOST: zod.string().nonempty(),
+  REDIS_PORT: zod.string().nonempty(),
+  REDIS_PREFIX: zod.string().nullable(),
 });
 
 export type EnvType = zod.infer<typeof envValidationSchema>;

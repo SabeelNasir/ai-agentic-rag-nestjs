@@ -1,12 +1,13 @@
+import { ENUM_CHAT_MODEL_PROVIDER } from "src/common/enums/enums";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class ChatModelLog {
   @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column({ type: "enum", enum: ["groq", "openai", "anthropic", "azure-openai"] })
-  model_type: "groq" | "openai" | "anthropic" | "azure-openai";
+  id: number; 
+  
+  @Column({ type: "enum", enum: ENUM_CHAT_MODEL_PROVIDER, nullable: true })
+  model_provider: ENUM_CHAT_MODEL_PROVIDER;
 
   @Column({ type: "varchar" })
   model_name: string;
