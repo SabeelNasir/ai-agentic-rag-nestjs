@@ -30,6 +30,9 @@ export class ChatModelLog {
   @Column({ type: "numeric", default: 0 })
   cost: number;
 
+  @Column({ type: "numeric", default: 0 })
+  latency: number;
+
   @CreateDateColumn()
   created_at: Date;
 

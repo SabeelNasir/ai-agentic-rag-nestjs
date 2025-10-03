@@ -25,6 +25,7 @@ export class ChatModelLogsQueueService {
       model_provider: this.configService.getChatModelType(),
       input_tokens: respMetadata["tokenUsage"]["promptTokens"],
       output_tokens: respMetadata["tokenUsage"]["completionTokens"],
+      latency: respMetadata['usage']['total_time'],
       request_id: ((respMetadata) => {
         try {
           return this.configService.getChatModelType() == "groq"
