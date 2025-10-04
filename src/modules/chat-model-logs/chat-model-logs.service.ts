@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ChatModelLog } from "../database/entities/chat-model-log.entity";
+import { ChatModelLog } from "../../database/entities/chat-model-log.entity";
 import { Repository } from "typeorm";
 import { AIMessageChunk } from "@langchain/core/messages";
 import { EnvConfigService } from "src/config/env-config.service";

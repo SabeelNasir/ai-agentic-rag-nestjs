@@ -7,7 +7,7 @@ import { queuePool } from "../utils/get-bull-queues";
 import { AIMessage } from "@langchain/core/messages";
 import { EnvConfigService } from "src/config/env-config.service";
 import { computeCostFromMetadata } from "src/common/utils/chat-call-cost-compute";
-import { ChatModelLog } from "src/modules/database/entities/chat-model-log.entity";
+import { ChatModelLog } from "src/database/entities/chat-model-log.entity";
 
 @Injectable()
 export class ChatModelLogsQueueService {

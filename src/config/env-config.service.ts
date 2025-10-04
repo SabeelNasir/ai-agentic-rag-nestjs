@@ -27,6 +27,9 @@ export class EnvConfigService {
   getOpenAIModel() {
     return this.configService.get<string>("OPENAI_CHAT_MODEL");
   }
+  getOpenAIEmbeddingModel() {
+    return this.configService.get<string>("OPENAI_EMBEDDING_MODEL");
+  }
 
   getChatModelMaxCompletionTokens() {
     return 1000;

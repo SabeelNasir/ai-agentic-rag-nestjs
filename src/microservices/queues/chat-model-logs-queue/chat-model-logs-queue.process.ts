@@ -3,7 +3,7 @@ import { Process, Processor } from "@nestjs/bull";
 import { type Job } from "bull";
 import { ENUM_QUEUES } from "src/common/enums/enums";
 import { ChatModelLogsService } from "src/modules/chat-model-logs/chat-model-logs.service";
-import { ChatModelLog } from "src/modules/database/entities/chat-model-log.entity";
+import { ChatModelLog } from "src/database/entities/chat-model-log.entity";
 
 @Processor(ENUM_QUEUES.CHAT_MODEL_LOGGING)
 export class ChatModelLogsQueueProcess {
