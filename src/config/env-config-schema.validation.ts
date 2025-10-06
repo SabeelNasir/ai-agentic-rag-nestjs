@@ -18,6 +18,9 @@ export const envValidationSchema = zod.object({
   REDIS_HOST: zod.string().nonempty(),
   REDIS_PORT: zod.string().nonempty(),
   REDIS_PREFIX: zod.string().nullable(),
+
+  // Tools API Keys
+  TAVILY_API_KEY: zod.string().nullable(),
 });
 
 export type EnvType = zod.infer<typeof envValidationSchema>;

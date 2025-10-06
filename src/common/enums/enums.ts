@@ -8,3 +8,11 @@ export enum ENUM_CHAT_MODEL_PROVIDER {
   ANTHROPIC = "anthropic",
   AZURE_OPENAI = "azure-openai",
 }
+
+export enum ENUM_VECTOR_COLLECTIONS {
+  NETFLIX_SHOWS = "netflix-shows",
+}
+
+export enum ENUM_MAX_OUTPUT_TOKENS {
+  NETFLIX_SHOWS_CHATBOT = 1200,
+}

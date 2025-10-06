@@ -14,7 +14,8 @@ const pricing: Record<string, { input: number; output: number }> = {
 
   // ---- Groq examples ----
   "qwen/qwen3-32b": { input: 0.000085, output: 0.000347 },
-  "openai/gpt-oss-120b": { input: 0.00015, output: 0.00075 }
+  "openai/gpt-oss-120b": { input: 0.00015, output: 0.00075 },
+  "llama-3.1-8b-instant": { input: 0.00015, output: 0.00075 }
 };
 
 function computeCostFromMetadata(metadata: Record<string, any>): {

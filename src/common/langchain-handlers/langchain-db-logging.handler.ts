@@ -2,7 +2,7 @@ import { BaseCallbackHandler } from "node_modules/@langchain/core/dist/callbacks
 import { computeCostFromMetadata } from "../utils/chat-call-cost-compute";
 import { Serialized } from "@langchain/core/load/serializable";
 import { ChatGeneration, LLMResult } from "@langchain/core/outputs";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { ChatModelLogsQueueService } from "src/microservices/queues/chat-model-logs-queue/chat-model-logs-queue.service";
 
 @Injectable()
@@ -11,6 +11,7 @@ export class DBLoggingHandler extends BaseCallbackHandler {
     super();
   }
   name = "DBLoggingHandler";
+  private logger = new Logger("LLMChainLogging");
 
   handleLLMStart(
     llm: Serialized,
@@ -38,5 +39,11 @@ export class DBLoggingHandler extends BaseCallbackHandler {
 
     // Push in queue  for saving
     await this.queueService.addJob(chatGen.message);
+  }
+  handleToolStart(tool: Serialized, input: string) {
+    this.logger.log("ToolStart: " + tool.name + " called, input: " + input.toString());
+  }
+  handleToolEnd(output: any, runId: string, parentRunId?: string, tags?: string[]) {
+    this.logger.log("Tool end: " + output);
   }
 }

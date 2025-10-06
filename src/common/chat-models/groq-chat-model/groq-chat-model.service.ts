@@ -1,11 +1,12 @@
 import { ChatGroq } from "@langchain/groq";
 import { ChatOpenAI } from "@langchain/openai";
-import { Injectable, OnModuleInit } from "@nestjs/common";
+import { Global, Injectable, OnModuleInit } from "@nestjs/common";
 import { ENUM_CHAT_MODEL_PROVIDER } from "src/common/enums/enums";
 import { DBLoggingHandler } from "src/common/langchain-handlers/langchain-db-logging.handler";
 import { EnvConfigService } from "src/config/env-config.service";
 import { ChatModelLogsQueueService } from "src/microservices/queues/chat-model-logs-queue/chat-model-logs-queue.service";
 
+@Global()
 @Injectable()
 export class GroqChatModelService implements OnModuleInit {
   public modelGroq: ChatGroq;

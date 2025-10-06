@@ -2,7 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ConfigService } from "@nestjs/config";
 import { EnvConfigService } from "./config/env-config.service";
-import { Logger } from "@nestjs/common";
+import { Logger, ValidationPipe } from "@nestjs/common";
 import { ResponseInterceptor } from "./common/interceptors/response-interceptor";
 
 const configService = new EnvConfigService(new ConfigService());
@@ -13,6 +13,13 @@ async function bootstrap() {
 
   app.enableCors();
   app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+      forbidNonWhitelisted: true,
+    }),
+  );
 
   //Start microservices
   app.startAllMicroservices();

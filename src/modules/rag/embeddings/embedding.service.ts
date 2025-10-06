@@ -14,12 +14,17 @@ export class EmbeddingService {
     this.logger.log(`Embedding Model: ${this.config.getOpenAIEmbeddingModel()}`);
   }
 
-  embeddTexts(texts: string[]): Promise<number[][]> {
+  private embeddTexts(texts: string[]): Promise<number[][]> {
     return this.embedding.embedDocuments(texts);
   }
 
   async embedText(text: string) {
     const resp = await this.embeddTexts([text]);
     return resp[0];
+  }
+
+  async generateEmbedding(query: string) {
+    const resp = await this.embedding.embedQuery(query);
+    return resp;
   }
 }

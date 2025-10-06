@@ -7,6 +7,10 @@ import { Repository } from "typeorm";
 export class VectorstoreService {
   constructor(@InjectRepository(Vector) private readonly repo: Repository<Vector>) {}
 
+  getRepo() {
+    return this.repo;
+  }
+
   save(payload: Partial<Vector>) {
     return this.repo.save(payload);
   }
@@ -14,19 +18,24 @@ export class VectorstoreService {
   /**
    * Retrieve most similar vectors using pgvector similarity search
    */
-  async similaritySearch(params: { collection: string; queryEmbedding: number[]; limit?: number }) {
-    const { collection, queryEmbedding, limit = 5 } = params;
+  async similaritySearch(params: { collection: string; queryEmbedding: number[]; limit: number }) {
+    const { collection, queryEmbedding, limit } = params;
+
+    const embeddingLiteral = `[${queryEmbedding.join(",")}]`;
 
     return this.repo.query(
-      `
-      SELECT id, collection, payload, created_at,
-             1 - (embedding <-> $2) AS similarity
+      `SELECT 
+      id, 
+      collection, 
+      metadata, 
+      created_at,
+      1 - (embedding <#> $2::vector) AS similarity
       FROM vectors
       WHERE collection = $1
-      ORDER BY embedding <-> $2
+      ORDER BY embedding <#> $2::vector
       LIMIT $3
       `,
-      [collection, queryEmbedding, limit],
+      [collection, embeddingLiteral, limit],
     );
   }
 

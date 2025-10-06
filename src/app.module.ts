@@ -11,7 +11,11 @@ import { TypeOrmConfigModule } from "./database/typeorm/typeorm-config.module";
 import { MicroservicesModule } from "./microservices/microservices.module";
 import { ChatModelLogsQueueModule } from "./microservices/queues/chat-model-logs-queue/chat-model-logs-queue.module";
 import { SharedModule } from "./modules/shared/shared.module";
-import { NetflixShowModule } from './modules/netflix-show/netflix-show.module';
+import { NetflixShowModule } from "./modules/netflix-show/netflix-show.module";
+import { RagModule } from "./modules/rag/rag.module";
+import { GroqChatModelModule } from "./common/chat-models/groq-chat-model/groq-chat-model.module";
+import { NetflixShowAgentModule } from "./modules/agent/netflix-show/netflix-show-agent.module";
+import { MemoryModule } from "./modules/memory/memory.module";
 
 @Module({
   imports: [
@@ -21,14 +25,18 @@ import { NetflixShowModule } from './modules/netflix-show/netflix-show.module';
     HrRecuiterAgentModule,
     ChatModelLogsModule,
     MicroservicesModule,
+    RagModule,
+    MemoryModule,
 
     //Shared Modules
     SharedModule,
+    GroqChatModelModule,
 
     // Queue Modules
     ChatModelLogsQueueModule,
 
     NetflixShowModule,
+    NetflixShowAgentModule,
   ],
   controllers: [AppController, AgentController, ChatModelLogController],
   providers: [AppService],

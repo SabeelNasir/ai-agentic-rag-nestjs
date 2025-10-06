@@ -60,6 +60,9 @@ export class EnvConfigService {
   getDatabasePort() {
     return parseInt(this.configService.get<string>("DATABASE_PORT")!, 10);
   }
+  getDatabaseUri() {
+    return `postgresql://${this.getDatabaseUser()}:${this.getDatabasePassword()}@${this.getDatabaseHost()}:${this.getDatabasePort()}/${this.getDatabaseName()}?sslmode=disable`;
+  }
 
   // Redis Credentials
   getRedisHost(): string {
@@ -72,7 +75,12 @@ export class EnvConfigService {
     return this.configService.get<string>("REDIS_PREFIX");
   }
 
+
+  // LLM Tools API Keys
   getWeatherApiKey() {
     return this.configService.get<string>("WEATHER_API_KEY");
+  }
+  getTavilyApiKey() {
+    return this.configService.get<string>("TAVILY_API_KEY");
   }
 }
