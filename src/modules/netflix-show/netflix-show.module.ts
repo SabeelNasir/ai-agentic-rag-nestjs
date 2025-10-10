@@ -5,9 +5,10 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { NetflixShow } from "../../database/entities/netflix-show.entity";
 import { NetflixShowRagService } from "./netflix-show-rag.service";
 import { RagModule } from "../rag/rag.module";
+import { EmbeddingVectorsQueueModule } from "src/microservices/queues/embedding-vectors-queue/module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([NetflixShow]), RagModule],
+  imports: [TypeOrmModule.forFeature([NetflixShow]), RagModule, EmbeddingVectorsQueueModule],
   controllers: [NetflixShowController],
   providers: [NetflixShowService, NetflixShowRagService],
   exports: [NetflixShowService],

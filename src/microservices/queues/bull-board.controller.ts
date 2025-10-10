@@ -6,7 +6,7 @@ import { getBullBoardQueues } from "./utils/get-bull-queues";
 
 @Controller("/admin/queues")
 export class BullBoardController {
-  @All("*")
+  @All("/*")
   admin(@Request() req: express.Request, @Response() res: express.Response, @Next() next: express.NextFunction) {
     const serverAdapter = new ExpressAdapter();
     serverAdapter.setBasePath("/admin/queues");

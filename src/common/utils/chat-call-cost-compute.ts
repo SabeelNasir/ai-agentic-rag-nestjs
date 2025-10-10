@@ -11,6 +11,9 @@ const pricing: Record<string, { input: number; output: number }> = {
   "gpt-4o": { input: 0.0025, output: 0.01 },
   "gpt-4o-2024-08-06": { input: 0.0025, output: 0.01 },
   "gpt-4o-mini-2024-07-18": { input: 0.00015, output: 0.0006 },
+  "gpt-4.1-2025-04-14": { input: 0.002, output: 0.008 },    
+  //   Input: $2.00 / 1,000,000 tokens = $0.002 per 1,000 tokens
+  //   Output: $8.00 / 1,000,000 tokens = $0.008 per 1,000 tokens
 
   // ---- Groq examples ----
   "qwen/qwen3-32b": { input: 0.000085, output: 0.000347 },

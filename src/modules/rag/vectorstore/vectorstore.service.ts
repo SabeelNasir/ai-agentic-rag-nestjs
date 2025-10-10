@@ -26,8 +26,7 @@ export class VectorstoreService {
     return this.repo.query(
       `SELECT 
       id, 
-      collection, 
-      metadata, 
+      embedding_text,
       created_at,
       1 - (embedding <#> $2::vector) AS similarity
       FROM vectors

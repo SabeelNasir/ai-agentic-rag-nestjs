@@ -27,6 +27,9 @@ export class NetflixShowService {
   async updateVectorsEmbedding(body: DtoPagination) {
     const shows = await this.repo.find({ take: body.limit, skip: body.skip, order: { show_id: "ASC" } });
     await this.ragService.createEmbeddings(shows);
-    return shows;
+    return {
+      message: "Embeddings Jobs initiated and pushed in queue !",
+      count: shows?.length,
+    };
   }
 }

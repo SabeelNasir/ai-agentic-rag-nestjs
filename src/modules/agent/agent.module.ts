@@ -8,9 +8,10 @@ import { NetflixShowAgent } from "./netflix-show/netflix-show.agent";
 import { MemoryModule } from "../memory/memory.module";
 import { TavilyWebsearchTool } from "./tools/tavily-websearch.tool";
 import { CustomWebsearchTool } from "./tools/custom-websearch.tool";
+import { OpenAIAgentsModule } from "./openai-agents-builder/module";
 
 @Module({
-  imports: [GroqChatModelModule, HrRecuiterAgentModule, NetflixShowAgentModule, MemoryModule],
+  imports: [GroqChatModelModule, HrRecuiterAgentModule, NetflixShowAgentModule, MemoryModule, OpenAIAgentsModule],
   providers: [AgentService, FoodGraphService, NetflixShowAgent, TavilyWebsearchTool, CustomWebsearchTool],
   exports: [AgentService],
 })

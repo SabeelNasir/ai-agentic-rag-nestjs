@@ -16,6 +16,8 @@ import { RagModule } from "./modules/rag/rag.module";
 import { GroqChatModelModule } from "./common/chat-models/groq-chat-model/groq-chat-model.module";
 import { NetflixShowAgentModule } from "./modules/agent/netflix-show/netflix-show-agent.module";
 import { MemoryModule } from "./modules/memory/memory.module";
+import { EmbeddingVectorsQueueModule } from "./microservices/queues/embedding-vectors-queue/module";
+import { GatewayModule } from "./microservices/websockets/gateway.module";
 
 @Module({
   imports: [
@@ -27,6 +29,7 @@ import { MemoryModule } from "./modules/memory/memory.module";
     MicroservicesModule,
     RagModule,
     MemoryModule,
+    GatewayModule,
 
     //Shared Modules
     SharedModule,
@@ -34,6 +37,7 @@ import { MemoryModule } from "./modules/memory/memory.module";
 
     // Queue Modules
     ChatModelLogsQueueModule,
+    EmbeddingVectorsQueueModule,
 
     NetflixShowModule,
     NetflixShowAgentModule,

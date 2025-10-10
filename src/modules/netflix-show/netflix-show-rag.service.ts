@@ -4,13 +4,16 @@ import { VectorstoreService } from "../rag/vectorstore/vectorstore.service";
 import { NetflixShow } from "src/database/entities/netflix-show.entity";
 import { Vector } from "src/database/entities/vector.entity";
 import { EmbeddingService } from "../rag/embeddings/embedding.service";
-import { ENUM_VECTOR_COLLECTIONS } from "src/common/enums/enums";
+import { ENUM_EMITTER_EVENTS, ENUM_VECTOR_COLLECTIONS } from "src/common/enums/enums";
+import { EmbeddingVectorsQueueService } from "src/microservices/queues/embedding-vectors-queue/service";
+import { IEmbeddingVectorsQueuePayload } from "src/microservices/queues/embedding-vectors-queue/interfaces/job-payload.interface";
 
 @Injectable()
 export class NetflixShowRagService {
   constructor(
     private readonly vectorStoreService: VectorstoreService,
     private readonly embeddingService: EmbeddingService,
+    private readonly embeddingQueueService: EmbeddingVectorsQueueService,
   ) {}
   private readonly logger = new Logger(NetflixShowRagService.name);
 
@@ -41,15 +44,15 @@ export class NetflixShowRagService {
       await Promise.all(
         shows.map(async (show) => {
           const showSummary = this.createSummaryText(show);
-          const embedding = await this.embeddingService.embedText(showSummary);
-          const payload = {
-            embedding,
+          const payload: Record<string, any> = {
             collection: ENUM_VECTOR_COLLECTIONS.NETFLIX_SHOWS,
             metadata: { ...show },
             id: `${ENUM_VECTOR_COLLECTIONS.NETFLIX_SHOWS}-${show.show_id}`,
           };
-          await this.vectorStoreService.getRepo().save(payload);
-          this.logger.log(`Embedding created for show: ${show.show_id} - ${show.title}`);
+          payload.embedding_text = showSummary;
+          await this.embeddingQueueService.addJob({
+            ...(payload as IEmbeddingVectorsQueuePayload),
+          });
         }),
       );
     } else {

@@ -25,7 +25,7 @@ export class NetflixShowPgVectorTool {
         description: "gather netflix shows details from database",
         schema: z.object({
           query: z.string().describe("user query to find similar records in vectors table"),
-          limit: z.number().describe("number of results to return, maximum 20 is allowed.").default(2),
+          limit: z.number().describe("number of results to return, maximum 50 is allowed.").default(2),
         }),
       },
     );

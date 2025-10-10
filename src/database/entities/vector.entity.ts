@@ -10,6 +10,7 @@ export class Vector {
   collection: string;
 
   // pgvector column
+  @Index("vectors_embedding_ivfflat_idx", { synchronize: false })
   @Column({
     type: "vector",
     nullable: true,
@@ -22,6 +23,9 @@ export class Vector {
 
   @Column({ type: "jsonb", nullable: true })
   metadata?: Record<string, any>;
+
+  @Column({ type: "text", nullable: true })
+  embedding_text?: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamptz", default: () => "now()" })
   created_at: Date;

@@ -1,5 +1,6 @@
 export enum ENUM_QUEUES {
   CHAT_MODEL_LOGGING = "chat-model-logging",
+  VECTORS_EMBEDDING = "vectors-embedding",
 }
 
 export enum ENUM_CHAT_MODEL_PROVIDER {
@@ -15,4 +16,12 @@ export enum ENUM_VECTOR_COLLECTIONS {
 
 export enum ENUM_MAX_OUTPUT_TOKENS {
   NETFLIX_SHOWS_CHATBOT = 1200,
+}
+
+export enum ENUM_EMITTER_EVENTS {
+  EMBEDDING_COMPLETED = "embedding-completed",
+}
+
+export enum ENUM_WEBSOCKET_EVENTS {
+  EMBEDDING_COMPLETED = "embedding-completed",
 }
