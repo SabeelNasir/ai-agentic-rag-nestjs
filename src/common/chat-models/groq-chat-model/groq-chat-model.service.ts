@@ -36,4 +36,18 @@ export class GroqChatModelService implements OnModuleInit {
   getModel() {
     return this.envConfig.getChatModelType() == ENUM_CHAT_MODEL_PROVIDER.GROQ ? this.modelGroq : this.modelOpenAI;
   }
+
+  getModelForDynamicAIAgents(provider?: ENUM_CHAT_MODEL_PROVIDER) {
+    switch (provider) {
+      case ENUM_CHAT_MODEL_PROVIDER.GROQ:
+        return this.modelGroq;
+        break;
+      case ENUM_CHAT_MODEL_PROVIDER.OPENAI:
+        return this.modelOpenAI;
+        break;
+      default:
+        return this.modelGroq;
+        break;
+    }
+  }
 }

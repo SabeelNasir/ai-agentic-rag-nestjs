@@ -18,6 +18,7 @@ import { NetflixShowAgentModule } from "./modules/agent/netflix-show/netflix-sho
 import { MemoryModule } from "./modules/memory/memory.module";
 import { EmbeddingVectorsQueueModule } from "./microservices/queues/embedding-vectors-queue/module";
 import { GatewayModule } from "./microservices/websockets/gateway.module";
+import { AiAgentModule } from "./modules/ai-agent/ai-agent.module";
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { GatewayModule } from "./microservices/websockets/gateway.module";
     RagModule,
     MemoryModule,
     GatewayModule,
+    AiAgentModule,
 
     //Shared Modules
     SharedModule,

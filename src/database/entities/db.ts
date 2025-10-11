@@ -1,3 +1,5 @@
+import { AiAgentToolEntity } from "./ai-agent-tool.entity";
+import { AiAgentEntity } from "./ai-agent.entity";
 import { ChatModelLog } from "./chat-model-log.entity";
 import { FoodCategory } from "./food-category.entity";
 import { FoodProduct } from "./food-product.entity";
@@ -14,4 +16,6 @@ export default {
   NetflixShow,
   Vector,
   Memory,
+  AiAgentEntity,
+  AiAgentToolEntity,
 };
