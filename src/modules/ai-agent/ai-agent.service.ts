@@ -24,7 +24,7 @@ export class AiAgentService {
   }
 
   findAll() {
-    return this.repo.find();
+    return this.repo.find({ order: { id: "ASC" } });
   }
 
   findById(id: number) {
