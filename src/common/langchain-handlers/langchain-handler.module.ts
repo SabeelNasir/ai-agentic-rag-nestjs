@@ -4,7 +4,7 @@ import { DBLoggingHandler } from "./langchain-db-logging.handler";
 
 @Module({
   imports: [ChatModelLogsQueueModule],
-  providers: [DBLoggingHandler],
-  exports: [DBLoggingHandler],
+  providers: [],
+  exports: [],
 })
 export class LangchainHandlerModule {}

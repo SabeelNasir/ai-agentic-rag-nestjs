@@ -23,13 +23,13 @@ export class GroqChatModelService implements OnModuleInit {
       model: this.envConfig.getGroqModel()!,
       maxTokens: this.envConfig.getChatModelMaxCompletionTokens(),
       temperature: 0.7,
-      callbacks: [new DBLoggingHandler(this.queueService)],
+      callbacks: [new DBLoggingHandler(this.queueService, ENUM_CHAT_MODEL_PROVIDER.GROQ)],
     });
     this.modelOpenAI = new ChatOpenAI({
       apiKey: this.envConfig.getOpenAIApiKey(),
       model: this.envConfig.getOpenAIModel()!,
       maxTokens: this.envConfig.getChatModelMaxCompletionTokens(),
-      callbacks: [new DBLoggingHandler(this.queueService)],
+      callbacks: [new DBLoggingHandler(this.queueService, ENUM_CHAT_MODEL_PROVIDER.OPENAI)],
     });
   }
 

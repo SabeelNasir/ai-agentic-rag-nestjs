@@ -3,11 +3,17 @@ import { computeCostFromMetadata } from "../utils/chat-call-cost-compute";
 import { Serialized } from "@langchain/core/load/serializable";
 import { ChatGeneration, LLMResult } from "@langchain/core/outputs";
 import { Injectable, Logger } from "@nestjs/common";
-import { ChatModelLogsQueueService } from "src/microservices/queues/chat-model-logs-queue/chat-model-logs-queue.service";
+import {
+  ChatModelLogsQueueService,
+  IChatModelLogJob,
+} from "src/microservices/queues/chat-model-logs-queue/chat-model-logs-queue.service";
+import { ENUM_CHAT_MODEL_PROVIDER } from "../enums/enums";
 
-@Injectable()
 export class DBLoggingHandler extends BaseCallbackHandler {
-  constructor(private queueService: ChatModelLogsQueueService) {
+  constructor(
+    private queueService: ChatModelLogsQueueService,
+    private modelProvider: ENUM_CHAT_MODEL_PROVIDER = ENUM_CHAT_MODEL_PROVIDER.GROQ,
+  ) {
     super();
   }
   name = "DBLoggingHandler";
@@ -35,10 +41,11 @@ export class DBLoggingHandler extends BaseCallbackHandler {
     console.log("CHatModel LLM End: ", "Output: ", output, runId, "Extra Params", extraParams);
     const chatGen = output.generations?.[0]?.[0] as ChatGeneration;
     const metadata = chatGen.message.response_metadata ?? {};
+    // console.log("chatGen.message", chatGen.message);
     // console.log("Metadata", metadata);
 
     // Push in queue  for saving
-    await this.queueService.addJob(chatGen.message);
+    await this.queueService.addJob({ model_provider: this.modelProvider, ...chatGen.message } as IChatModelLogJob);
   }
   handleToolStart(tool: Serialized, input: string) {
     this.logger.log("ToolStart: " + tool.name + " called, input: " + input.toString());
