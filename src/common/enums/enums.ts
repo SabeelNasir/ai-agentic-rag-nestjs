@@ -12,6 +12,7 @@ export enum ENUM_CHAT_MODEL_PROVIDER {
 
 export enum ENUM_VECTOR_COLLECTIONS {
   NETFLIX_SHOWS = "netflix-shows",
+  DOCUMENTS = "documents",
 }
 
 export enum ENUM_MAX_OUTPUT_TOKENS {
@@ -24,4 +25,9 @@ export enum ENUM_EMITTER_EVENTS {
 
 export enum ENUM_WEBSOCKET_EVENTS {
   EMBEDDING_COMPLETED = "embedding-completed",
+}
+
+export enum ENUM_TOOL_TYPES {
+  HTTP_REQUEST = "http-request",
+  FILES_VECTOR_STORE = "files-vector-store",
 }

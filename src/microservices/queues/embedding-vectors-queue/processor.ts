@@ -25,8 +25,7 @@ export class EmbeddingVectorsQueueProcessor {
     payload.embedding = embedding;
     await this.vectorStoreService.getRepo().save(payload);
 
-    const show = payload.metadata as Partial<NetflixShow>;
-    this.logger.log(`Embedding created for show: ${show.show_id} - ${show.title}`);
+    this.logger.log(`Embedding created for data-row: `, payload.id);
   }
 
   @OnQueueCompleted()

@@ -19,6 +19,8 @@ import { MemoryModule } from "./modules/memory/memory.module";
 import { EmbeddingVectorsQueueModule } from "./microservices/queues/embedding-vectors-queue/module";
 import { GatewayModule } from "./microservices/websockets/gateway.module";
 import { AiAgentModule } from "./modules/ai-agent/ai-agent.module";
+import { FileLoaderModule } from "./modules/file-loader/file-loader.module";
+import { DocumentsAgentModule } from "./modules/agent/documents-agent/documents-agent.module";
 
 @Module({
   imports: [
@@ -32,6 +34,7 @@ import { AiAgentModule } from "./modules/ai-agent/ai-agent.module";
     MemoryModule,
     GatewayModule,
     AiAgentModule,
+    FileLoaderModule,
 
     //Shared Modules
     SharedModule,
@@ -43,6 +46,7 @@ import { AiAgentModule } from "./modules/ai-agent/ai-agent.module";
 
     NetflixShowModule,
     NetflixShowAgentModule,
+    DocumentsAgentModule,
   ],
   controllers: [AppController, AgentController, ChatModelLogController],
   providers: [AppService],

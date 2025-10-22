@@ -3,6 +3,7 @@ import { AgentService } from "./agent.service";
 import { HrRecuiterGraphService } from "./hr-recuiter/hr-recuiter.graph.service";
 import { NetflixShowAgent } from "./netflix-show/netflix-show.agent";
 import { DtoChatPayload } from "src/common/dto/chat-payload.dto";
+import { DocumentsAgentService } from "./documents-agent/documents-agent.service";
 
 @Controller("agent")
 export class AgentController {
@@ -10,6 +11,7 @@ export class AgentController {
     private service: AgentService,
     private hrAgent: HrRecuiterGraphService,
     private netflixShowsAgent: NetflixShowAgent,
+    private docsAgentService: DocumentsAgentService,
   ) {}
 
   @Post("chef")
@@ -43,6 +45,24 @@ export class AgentController {
   @Post("netflix-shows/:sessionId")
   async chatAgentSameSession(@Body() payload: DtoChatPayload, @Param("sessionId") sessionId: string) {
     const llmResp = await this.netflixShowsAgent.invoke(payload.prompt, sessionId);
+    return {
+      sessionId,
+      response: llmResp,
+    };
+  }
+
+  @Post("docs-chat")
+  async chatDocs(@Body() payload: DtoChatPayload) {
+    const sessionId = new Date().getTime().toString();
+    const llmResp = await this.docsAgentService.invoke(payload.prompt, sessionId);
+    return {
+      sessionId,
+      response: llmResp,
+    };
+  }
+  @Post("docs-chat/:sessionId")
+  async chatDocsSameSession(@Body() payload: DtoChatPayload, @Param("sessionId") sessionId: string) {
+    const llmResp = await this.docsAgentService.invoke(payload.prompt, sessionId);
     return {
       sessionId,
       response: llmResp,
