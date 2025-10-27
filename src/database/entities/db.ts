@@ -1,6 +1,7 @@
 import { AiAgentToolEntity } from "./ai-agent-tool.entity";
 import { AiAgentEntity } from "./ai-agent.entity";
 import { ChatModelLog } from "./chat-model-log.entity";
+import { DocumentEntity } from "./document.entity";
 import { FoodCategory } from "./food-category.entity";
 import { FoodProduct } from "./food-product.entity";
 import { ItemEntity } from "./items.entity";
@@ -18,4 +19,5 @@ export default {
   Memory,
   AiAgentEntity,
   AiAgentToolEntity,
+  DocumentEntity,
 };

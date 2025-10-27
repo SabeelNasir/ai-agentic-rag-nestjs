@@ -75,12 +75,16 @@ export class EnvConfigService {
     return this.configService.get<string>("REDIS_PREFIX");
   }
 
-
   // LLM Tools API Keys
   getWeatherApiKey() {
     return this.configService.get<string>("WEATHER_API_KEY");
   }
   getTavilyApiKey() {
     return this.configService.get<string>("TAVILY_API_KEY");
+  }
+
+  // Liveblocks keys
+  getLiveblocksSecretKey(): string {
+    return this.configService.get<string>("LIVEBLOCKS_SECRET_KEY")!;
   }
 }

@@ -1,6 +1,6 @@
 import { DataSource, DataSourceOptions } from "typeorm";
-import Entities from "../entities/db";
 import { config } from "dotenv";
+import migrationEntities from "../entities/migration-entities";
 
 config();
 const databaseConfigurations: DataSourceOptions = {
@@ -12,7 +12,7 @@ const databaseConfigurations: DataSourceOptions = {
   schema: process.env.DATABASE_SCHEMA,
   synchronize: false,
   host: process.env.DATABASE_HOST,
-  entities: Entities,
+  entities: migrationEntities,
   cache: false,
   migrations: ["dist/database/migrations/*{.ts,.js}"],
   logging: true,

@@ -21,6 +21,8 @@ import { GatewayModule } from "./microservices/websockets/gateway.module";
 import { AiAgentModule } from "./modules/ai-agent/ai-agent.module";
 import { FileLoaderModule } from "./modules/file-loader/file-loader.module";
 import { DocumentsAgentModule } from "./modules/agent/documents-agent/documents-agent.module";
+import { LiveblocksModule } from "./modules/liveblocks/liveblocks.module";
+import { DocumentsModule } from "./modules/documents/documents.module";
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { DocumentsAgentModule } from "./modules/agent/documents-agent/documents-
     GatewayModule,
     AiAgentModule,
     FileLoaderModule,
+    LiveblocksModule,
+    DocumentsModule,
 
     //Shared Modules
     SharedModule,
