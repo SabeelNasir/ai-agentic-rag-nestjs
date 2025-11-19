@@ -5,6 +5,7 @@ import { AiAgentToolEntity } from "src/database/entities/ai-agent-tool.entity";
 import { Repository } from "typeorm";
 import axios from "axios";
 import z from "zod";
+import https from "https";
 
 interface QueryParamSpec {
   type: "string" | "number" | "boolean";
@@ -72,6 +73,9 @@ export class AiAgentToolService {
           const resp = await axios.get(url.toString(), {
             headers: item.config?.default_headers || {},
             timeout: item.config?.timeout_ms || 10000,
+            httpsAgent: new https.Agent({
+              rejectUnauthorized: false, // ⛔ Disable SSL verification
+            }),
           });
 
           // ✅ Clean JSON output for LLM readability
