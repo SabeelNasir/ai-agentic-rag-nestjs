@@ -7,6 +7,7 @@ import { FoodProduct } from "./food-product.entity";
 import { ItemEntity } from "./items.entity";
 import { Memory } from "./memory.entity";
 import { NetflixShow } from "./netflix-show.entity";
+import { User } from "./user.entity";
 import { Vector } from "./vector.entity";
 
 export default {
@@ -20,4 +21,5 @@ export default {
   AiAgentEntity,
   AiAgentToolEntity,
   DocumentEntity,
+  User,
 };

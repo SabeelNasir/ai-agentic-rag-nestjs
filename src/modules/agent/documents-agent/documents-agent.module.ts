@@ -6,10 +6,17 @@ import { MemoryModule } from "src/modules/memory/memory.module";
 import { GroqChatModelModule } from "src/common/chat-models/groq-chat-model/groq-chat-model.module";
 import { CustomWebsearchTool } from "../tools/custom-websearch.tool";
 import { TavilyWebsearchTool } from "../tools/tavily-websearch.tool";
+import { DocumentsEditorAgentPrompts } from "./prompts/documents-editor-agent-prompts";
 
 @Module({
   imports: [RagModule, MemoryModule, GroqChatModelModule],
-  providers: [DocumentsAgentService, DocumentsPgVectorTool, TavilyWebsearchTool, CustomWebsearchTool],
-  exports: [DocumentsAgentService],
+  providers: [
+    DocumentsAgentService,
+    DocumentsPgVectorTool,
+    DocumentsEditorAgentPrompts,
+    TavilyWebsearchTool,
+    CustomWebsearchTool,
+  ],
+  exports: [DocumentsAgentService, DocumentsEditorAgentPrompts],
 })
 export class DocumentsAgentModule {}

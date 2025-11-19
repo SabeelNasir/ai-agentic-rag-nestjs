@@ -4,10 +4,15 @@ import { DtoPagination } from "src/common/dto/pagination.dto";
 import { DocumentEntity } from "src/database/entities/document.entity";
 import { FindOptionsOrder, Repository } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
+import { DocumentsAgentService } from "../agent/documents-agent/documents-agent.service";
+import { DtoDocsAICompletionsRequest } from "./dto/documents-request.dto";
 
 @Injectable()
 export class DocumentsService {
-  constructor(@InjectRepository(DocumentEntity) private readonly repo: Repository<DocumentEntity>) {}
+  constructor(
+    @InjectRepository(DocumentEntity) private readonly repo: Repository<DocumentEntity>,
+    private readonly docAgentService: DocumentsAgentService,
+  ) {}
 
   async save(payload: Partial<DocumentEntity>) {
     const saveDoc = await this.repo.save(payload);
@@ -32,5 +37,9 @@ export class DocumentsService {
   async update(id: number, patch: Partial<Document>) {
     await this.repo.update(id, patch);
     return this.repo.findOneBy({ id });
+  }
+
+  docAiCompletions(payload: DtoDocsAICompletionsRequest) {
+    return this.docAgentService.docEditorAICompletions(payload.content, payload.type);
   }
 }

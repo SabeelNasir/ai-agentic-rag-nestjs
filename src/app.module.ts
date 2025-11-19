@@ -23,6 +23,8 @@ import { FileLoaderModule } from "./modules/file-loader/file-loader.module";
 import { DocumentsAgentModule } from "./modules/agent/documents-agent/documents-agent.module";
 import { LiveblocksModule } from "./modules/liveblocks/liveblocks.module";
 import { DocumentsModule } from "./modules/documents/documents.module";
+import { UsersModule } from "./modules/users/users.module";
+import { AuthModule } from "./modules/auth/auth.module";
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { DocumentsModule } from "./modules/documents/documents.module";
     FileLoaderModule,
     LiveblocksModule,
     DocumentsModule,
+    UsersModule,
+    AuthModule,
 
     //Shared Modules
     SharedModule,

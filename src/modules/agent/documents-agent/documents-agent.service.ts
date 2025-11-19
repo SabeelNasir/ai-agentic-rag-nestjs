@@ -2,13 +2,15 @@ import { Injectable, OnModuleInit } from "@nestjs/common";
 import { DocumentsPgVectorTool } from "../tools/documents-pgvector.tool";
 import { ChatGroq } from "@langchain/groq";
 import { ChatOpenAI } from "@langchain/openai";
-import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+import { BaseMessage, HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { GroqChatModelService } from "src/common/chat-models/groq-chat-model/groq-chat-model.service";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { PgMemorySaverService } from "src/modules/memory/pg-memory-saver.service";
 import { MemoryService } from "src/modules/memory/memory.service";
 import { extractLastAIMessage } from "src/common/utils/utils";
 import { CustomWebsearchTool } from "../tools/custom-websearch.tool";
+import { DocumentsEditorAgentPrompts } from "./prompts/documents-editor-agent-prompts";
+import { AICompletionsType } from "src/modules/documents/dto/documents-request.dto";
 
 @Injectable()
 export class DocumentsAgentService implements OnModuleInit {
@@ -20,6 +22,7 @@ export class DocumentsAgentService implements OnModuleInit {
     private readonly chatModelService: GroqChatModelService,
     private readonly memoryService: MemoryService,
     private readonly websearchTool: CustomWebsearchTool,
+    private readonly docAIPrompts: DocumentsEditorAgentPrompts,
   ) {}
 
   onModuleInit() {
@@ -48,5 +51,16 @@ export class DocumentsAgentService implements OnModuleInit {
     await pgMemoryService.addAIChatMessage(aiContent?.toString()!);
 
     return aiContent;
+  }
+
+  async docEditorAICompletions(docContent: string, type: AICompletionsType) {
+    let prompt: BaseMessage[] = [];
+    if (type === AICompletionsType.ImproveWriting) {
+      prompt = await this.docAIPrompts.improveWriting(docContent);
+    } else if (type === AICompletionsType.FixGrammer) {
+      prompt = await this.docAIPrompts.fixGrammer(docContent);
+    }
+    const result = await this.chatModelService.getModel().invoke(prompt);
+    return result.content;
   }
 }
