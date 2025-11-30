@@ -12,6 +12,9 @@ import { OpenAIAgentsModule } from "./openai-agents-builder/module";
 import { DocumentsAgentService } from "./documents-agent/documents-agent.service";
 import { DocumentsPgVectorTool } from "./tools/documents-pgvector.tool";
 import { DocumentsAgentModule } from "./documents-agent/documents-agent.module";
+import { SshAgentModule } from "./ssh-agent/ssh-agent.module";
+import { SshAgentService } from "./ssh-agent/ssh-agent.service";
+import { AgentController } from "./agent.controller";
 
 @Module({
   imports: [
@@ -21,8 +24,11 @@ import { DocumentsAgentModule } from "./documents-agent/documents-agent.module";
     MemoryModule,
     OpenAIAgentsModule,
     DocumentsAgentModule,
+    SshAgentModule,
   ],
-  providers: [AgentService, FoodGraphService, NetflixShowAgent, TavilyWebsearchTool, CustomWebsearchTool],
+  providers: [AgentService, FoodGraphService],
   exports: [AgentService],
+  controllers: [AgentController],
 })
 export class AgentModule {}
+  

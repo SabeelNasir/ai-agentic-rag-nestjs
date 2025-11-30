@@ -4,6 +4,7 @@ import { HrRecuiterGraphService } from "./hr-recuiter/hr-recuiter.graph.service"
 import { NetflixShowAgent } from "./netflix-show/netflix-show.agent";
 import { DtoChatPayload } from "src/common/dto/chat-payload.dto";
 import { DocumentsAgentService } from "./documents-agent/documents-agent.service";
+import { SshAgentService } from "./ssh-agent/ssh-agent.service";
 
 @Controller("agent")
 export class AgentController {
@@ -12,6 +13,7 @@ export class AgentController {
     private hrAgent: HrRecuiterGraphService,
     private netflixShowsAgent: NetflixShowAgent,
     private docsAgentService: DocumentsAgentService,
+    private readonly sshAgentService: SshAgentService,
   ) {}
 
   @Post("chef")
@@ -63,6 +65,24 @@ export class AgentController {
   @Post("docs-chat/:sessionId")
   async chatDocsSameSession(@Body() payload: DtoChatPayload, @Param("sessionId") sessionId: string) {
     const llmResp = await this.docsAgentService.invoke(payload.prompt, sessionId);
+    return {
+      sessionId,
+      response: llmResp,
+    };
+  }
+
+  @Post("ssh-chat")
+  async chatSshAgent(@Body() payload: DtoChatPayload) {
+    const sessionId = new Date().getTime().toString();
+    const llmResp = await this.sshAgentService.invoke(payload.prompt, sessionId);
+    return {
+      sessionId,
+      response: llmResp,
+    };
+  }
+  @Post("ssh-chat/:sessionId")
+  async chatSshAgentSameSession(@Body() payload: DtoChatPayload, @Param("sessionId") sessionId: string) {
+    const llmResp = await this.sshAgentService.invoke(payload.prompt, sessionId);
     return {
       sessionId,
       response: llmResp,

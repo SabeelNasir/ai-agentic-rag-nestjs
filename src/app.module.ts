@@ -25,6 +25,7 @@ import { LiveblocksModule } from "./modules/liveblocks/liveblocks.module";
 import { DocumentsModule } from "./modules/documents/documents.module";
 import { UsersModule } from "./modules/users/users.module";
 import { AuthModule } from "./modules/auth/auth.module";
+import { SshAgentModule } from "./modules/agent/ssh-agent/ssh-agent.module";
 
 @Module({
   imports: [
@@ -55,8 +56,9 @@ import { AuthModule } from "./modules/auth/auth.module";
     NetflixShowModule,
     NetflixShowAgentModule,
     DocumentsAgentModule,
+    SshAgentModule,
   ],
-  controllers: [AppController, AgentController, ChatModelLogController],
+  controllers: [AppController, ChatModelLogController],
   providers: [AppService],
 })
 export class AppModule {}
