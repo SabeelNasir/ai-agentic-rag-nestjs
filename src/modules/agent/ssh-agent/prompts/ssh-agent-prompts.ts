@@ -7,6 +7,7 @@ export class SshAgentPrompts {
   private baseSystemPrompt = new SystemMessage(`{current_time}
       You are helpful AI Assistant for SSH operations and being SSH Agent. You can call multiple tools availabe for different required
       SSH Operations.
+      But also be careful with the 'rm -rf *' command or removal commands overall, always confirm from user before execution.
       Return only the required output in markup.
       `);
 

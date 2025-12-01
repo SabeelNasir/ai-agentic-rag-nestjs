@@ -1,11 +1,15 @@
 import { tool } from "@langchain/core/tools";
 import { Injectable, Logger } from "@nestjs/common";
 import { SshExecuterService } from "src/modules/ssh-executer/ssh-executer.service";
+import { SshSessionManager } from "src/modules/ssh-executer/ssh-session-manager.service";
 import z from "zod";
 
 @Injectable()
 export class SshAgentTools {
-  constructor(private readonly sshExecuter: SshExecuterService) {}
+  constructor(
+    private readonly sshExecuter: SshExecuterService,
+    private readonly sshSessionManager: SshSessionManager,
+  ) {}
   private logger = new Logger(SshAgentTools.name);
 
   toolConnectSsh() {
@@ -92,7 +96,8 @@ export class SshAgentTools {
         //   };
         // }
 
-        const result = await this.sshExecuter.runRawCommand(cfg, input.command);
+        // const result = await this.sshExecuter.runRawCommand(cfg, input.command);
+        const result = await this.sshSessionManager.execInSession(cfg, input.command);
 
         return {
           success: result.success,
