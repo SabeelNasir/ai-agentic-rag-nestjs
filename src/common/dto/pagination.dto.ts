@@ -14,4 +14,6 @@ export class DtoPagination {
   @IsString()
   @IsOptional()
   order_direction: string;
+
+  [key: string]: any;
 }

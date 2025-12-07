@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { ChatModelLog } from "../../database/entities/chat-model-log.entity";
-import { Between, FindOptionsOrder, FindOptionsOrderValue, In, Repository } from "typeorm";
+import { Between, FindOptionsOrder, FindOptionsOrderValue, In, LessThanOrEqual, Like, MoreThanOrEqual, Repository } from "typeorm";
 import { AIMessageChunk } from "@langchain/core/messages";
 import { EnvConfigService } from "src/config/env-config.service";
 import { computeCostFromMetadata } from "src/common/utils/chat-call-cost-compute";
@@ -21,11 +21,44 @@ export class ChatModelLogsService {
     return this.repo.upsert(payload, { conflictPaths: { id: true } });
   }
 
-  getAll(query: DtoPagination) {
+  getAll(
+    query: DtoPagination
+  ) {
     const orderBy: FindOptionsOrder<ChatModelLog> = query.order_by
-      ? { [`${query.order_by}`]: query.order_direction }
+      ? { [`${query.order_by}`]: query.order_direction as FindOptionsOrderValue }
       : {};
-    return this.repo.find({ take: query.limit, skip: query.skip, order: { ...orderBy } });
+
+    const where: any = {};
+
+    if (query.modelName) {
+      where.model_name = Like(`%${query.modelName}%`);
+    }
+    if (query.modelProvider) {
+      where.model_provider = Like(`%${query.modelProvider}%`);
+    }
+    if (query.start_date || query.end_date) {
+      const startDate = query.start_date ? new Date(query.start_date) : null;
+      const endDate = query.end_date ? new Date(query.end_date) : null;
+
+      if (startDate && endDate) {
+        // Ensure end_date includes the entire day if only a date is provided
+        endDate.setHours(23, 59, 59, 999);
+        where.created_at = Between(startDate, endDate);
+      } else if (startDate) {
+        where.created_at = MoreThanOrEqual(startDate);
+      } else if (endDate) {
+        // Ensure end_date includes the entire day if only a date is provided
+        endDate.setHours(23, 59, 59, 999);
+        where.created_at = LessThanOrEqual(endDate);
+      }
+    }
+
+    return this.repo.find({
+      take: query.limit,
+      skip: query.skip,
+      order: { ...orderBy },
+      where: where,
+    });
   }
 
   async getModelWiseCostGraph() {
