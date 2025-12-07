@@ -10,8 +10,10 @@ export class CreateTableVectorForEmbeddings1759571455761 implements MigrationInt
             id TEXT PRIMARY KEY,                 -- unique id (e.g. "netflix_shows:show_id")
             collection TEXT NOT NULL,            -- collection name (e.g. 'netflix_shows')
             embedding vector(1536),              -- vector column (dimension depends on embedding model)
-            payload JSONB,                       -- metadata (title, description, etc.)
-            created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+            metadata JSONB,                       -- metadata (title, description, etc.)
+            embedding_text TEXT,                 -- embedding text
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+            updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()
             );
 
             CREATE INDEX IF NOT EXISTS vectors_collection_idx ON vectors (collection);
@@ -22,7 +24,7 @@ export class CreateTableVectorForEmbeddings1759571455761 implements MigrationInt
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`Drop table vector;`);
+    await queryRunner.query(`Drop table vectors;`);
   }
 }
 
