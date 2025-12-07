@@ -1,11 +1,13 @@
-import { Body, Controller, Param, Post } from "@nestjs/common";
+import { Body, Controller, Param, Post, UseGuards } from "@nestjs/common";
 import { AgentService } from "./agent.service";
 import { HrRecuiterGraphService } from "./hr-recuiter/hr-recuiter.graph.service";
 import { NetflixShowAgent } from "./netflix-show/netflix-show.agent";
 import { DtoChatPayload } from "src/common/dto/chat-payload.dto";
 import { DocumentsAgentService } from "./documents-agent/documents-agent.service";
 import { SshAgentService } from "./ssh-agent/ssh-agent.service";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
 @Controller("agent")
 export class AgentController {
   constructor(
