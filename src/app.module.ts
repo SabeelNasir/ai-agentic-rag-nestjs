@@ -40,7 +40,7 @@ import { SshAgentModule } from "./modules/agent/ssh-agent/ssh-agent.module";
     GatewayModule,
     AiAgentModule,
     FileLoaderModule,
-    LiveblocksModule,
+    // LiveblocksModule,
     DocumentsModule,
     UsersModule,
     AuthModule,
