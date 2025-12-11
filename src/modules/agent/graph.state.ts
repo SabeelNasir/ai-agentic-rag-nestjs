@@ -1,5 +1,5 @@
 import { BaseMessage } from "@langchain/core/messages";
-import { Annotation } from "node_modules/@langchain/langgraph/dist/graph";
+import { Annotation } from "@langchain/langgraph";
 
 // Init graph workflow
 export const GraphState = Annotation.Root({

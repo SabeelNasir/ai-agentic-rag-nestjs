@@ -5,7 +5,7 @@ import { Memory } from "src/database/entities/memory.entity";
 import { BaseChatMessageHistory } from "node_modules/@langchain/core/dist/chat_history";
 import { Serialized, SerializedNotImplemented } from "@langchain/core/load/serializable";
 import { AIMessage, BaseMessage, HumanMessage } from "@langchain/core/messages";
-import { SerializedFields } from "node_modules/@langchain/core/dist/load/map_keys";
+import { SerializedFields } from "node_modules/langchain/dist/load/map_keys";
 
 const LIMIT_PAST_CHAT = 100;
 

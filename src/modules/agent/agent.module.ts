@@ -15,6 +15,7 @@ import { DocumentsAgentModule } from "./documents-agent/documents-agent.module";
 import { SshAgentModule } from "./ssh-agent/ssh-agent.module";
 import { SshAgentService } from "./ssh-agent/ssh-agent.service";
 import { AgentController } from "./agent.controller";
+import { PostgresAgentModule } from "./postgres-agent/postgres-agent.module";
 
 @Module({
   imports: [
@@ -25,10 +26,10 @@ import { AgentController } from "./agent.controller";
     OpenAIAgentsModule,
     DocumentsAgentModule,
     SshAgentModule,
+    PostgresAgentModule,
   ],
   providers: [AgentService, FoodGraphService],
   exports: [AgentService],
   controllers: [AgentController],
 })
 export class AgentModule {}
-  

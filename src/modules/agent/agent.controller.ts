@@ -6,6 +6,7 @@ import { DtoChatPayload } from "src/common/dto/chat-payload.dto";
 import { DocumentsAgentService } from "./documents-agent/documents-agent.service";
 import { SshAgentService } from "./ssh-agent/ssh-agent.service";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { PostgresAgentService } from "./postgres-agent/postgres-agent.service";
 
 @UseGuards(JwtAuthGuard)
 @Controller("agent")
@@ -16,6 +17,7 @@ export class AgentController {
     private netflixShowsAgent: NetflixShowAgent,
     private docsAgentService: DocumentsAgentService,
     private readonly sshAgentService: SshAgentService,
+    private readonly postgresAgentService: PostgresAgentService,
   ) {}
 
   @Post("chef")
@@ -85,6 +87,23 @@ export class AgentController {
   @Post("ssh-chat/:sessionId")
   async chatSshAgentSameSession(@Body() payload: DtoChatPayload, @Param("sessionId") sessionId: string) {
     const llmResp = await this.sshAgentService.invoke(payload.prompt, sessionId);
+    return {
+      sessionId,
+      response: llmResp,
+    };
+  }
+  @Post("postgres-chat")
+  async chatPostgresAgent(@Body() payload: DtoChatPayload) {
+    const sessionId = new Date().getTime().toString();
+    const llmResp = await this.postgresAgentService.invoke(payload.prompt, sessionId);
+    return {
+      sessionId,
+      response: llmResp,
+    };
+  }
+  @Post("postgres-chat/:sessionId")
+  async chatPostgresAgentSameSession(@Body() payload: DtoChatPayload, @Param("sessionId") sessionId: string) {
+    const llmResp = await this.postgresAgentService.invoke(payload.prompt, sessionId);
     return {
       sessionId,
       response: llmResp,

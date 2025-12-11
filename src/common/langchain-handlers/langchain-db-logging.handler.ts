@@ -1,4 +1,4 @@
-import { BaseCallbackHandler } from "node_modules/@langchain/core/dist/callbacks/base";
+import { BaseCallbackHandler } from "@langchain/core/callbacks/base";
 import { computeCostFromMetadata } from "../utils/chat-call-cost-compute";
 import { Serialized } from "@langchain/core/load/serializable";
 import { ChatGeneration, LLMResult } from "@langchain/core/outputs";
