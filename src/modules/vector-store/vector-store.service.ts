@@ -16,6 +16,17 @@ export class VectorStoreService extends BaseRepoService<VectorStoreEntity> {
     super(repo);
   }
 
+  private readonly _listAllRelations = ["files", "createdByUser"];
+  private readonly _singleRelations = ["files", "createdByUser"];
+
+  listAll() {
+    return this.findAll({ relations: this._listAllRelations });
+  }
+
+  getById(id: number) {
+    return this.findOne({ relations: this._singleRelations, where: { id } });
+  }
+
   /**
    * @description Upload files, save metadata , creating embeddings & save vectors and in
    * last map these saved files with Vector Store

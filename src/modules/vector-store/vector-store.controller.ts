@@ -17,18 +17,18 @@ export class VectorStoreController {
 
   @Get()
   findAll() {
-    return this.service.findAll();
+    return this.service.listAll();
   }
 
   @Get(":id")
   findOne(@Param("id") id: number) {
-    return this.service.findOne({ id });
+    return this.service.getById(id);
   }
 
   @Patch(":id")
   async update(@Param("id") id: number, @Body() payload: Partial<VectorStoreEntity>) {
     await this.service.update({ id }, payload);
-    return this.service.findOne({ id });
+    return this.service.getById(id);
   }
 
   @Put(":id/upload-file")

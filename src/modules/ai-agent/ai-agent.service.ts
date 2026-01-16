@@ -18,6 +18,7 @@ export class AiAgentService {
     private readonly toolService: AiAgentToolService,
     private readonly memoryService: MemoryService,
   ) {}
+  private readonly _singleRelations = ["tools.vectorStore", "tools.vectorStore.files"];
 
   async save(payload: Partial<AiAgentEntity>) {
     return this.repo.save(payload);
@@ -28,7 +29,7 @@ export class AiAgentService {
   }
 
   findById(id: number) {
-    return this.repo.findOne({ where: { id }, relations: ["tools.vectorStore"] });
+    return this.repo.findOne({ where: { id }, relations: this._singleRelations });
   }
 
   async chatWithAgent(agentId: number, userPrompt: string, sessionId: string) {

@@ -39,6 +39,6 @@ export class VectorStoreEntity {
   @JoinColumn({ name: "created_by", foreignKeyConstraintName: "vector_store_user_created_by_fk" })
   createdByUser: User;
 
-  @OneToMany(() => VectorStoreFileEntity, (file) => file.vectorStore, { eager: true })
+  @OneToMany(() => VectorStoreFileEntity, (file) => file.vectorStore)
   files: VectorStoreFileEntity[];
 }
