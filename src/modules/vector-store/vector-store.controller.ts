@@ -26,8 +26,9 @@ export class VectorStoreController {
   }
 
   @Patch(":id")
-  update(@Param("id") id: number, @Body() payload: Partial<VectorStoreEntity>) {
-    return this.service.update({ id }, payload);
+  async update(@Param("id") id: number, @Body() payload: Partial<VectorStoreEntity>) {
+    await this.service.update({ id }, payload);
+    return this.service.findOne({ id });
   }
 
   @Put(":id/upload-file")
