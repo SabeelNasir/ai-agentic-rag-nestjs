@@ -26,6 +26,8 @@ import { DocumentsModule } from "./modules/documents/documents.module";
 import { UsersModule } from "./modules/users/users.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { SshAgentModule } from "./modules/agent/ssh-agent/ssh-agent.module";
+import { VectorStoreModule } from "./modules/vector-store/vector-store.module";
+import { VectorStoreFileModule } from "./modules/vector-store-file/vector-store-file.module";
 
 @Module({
   imports: [
@@ -57,6 +59,8 @@ import { SshAgentModule } from "./modules/agent/ssh-agent/ssh-agent.module";
     NetflixShowAgentModule,
     DocumentsAgentModule,
     SshAgentModule,
+    VectorStoreModule,
+    VectorStoreFileModule,
   ],
   controllers: [AppController, ChatModelLogController],
   providers: [AppService],

@@ -27,6 +27,9 @@ export class Vector {
   @Column({ type: "text", nullable: true })
   embedding_text?: string;
 
+  @Column({ type: "int", nullable: true })
+  vector_store_id?: number;
+
   @CreateDateColumn({ name: "created_at", type: "timestamptz", default: () => "now()" })
   created_at: Date;
 

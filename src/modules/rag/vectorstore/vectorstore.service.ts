@@ -18,8 +18,13 @@ export class VectorstoreService {
   /**
    * Retrieve most similar vectors using pgvector similarity search
    */
-  async similaritySearch(params: { collection: string; queryEmbedding: number[]; limit: number }) {
-    const { collection, queryEmbedding, limit } = params;
+  async similaritySearch(params: {
+    collection: string;
+    queryEmbedding: number[];
+    limit: number;
+    vectorStoreId?: number;
+  }) {
+    const { collection, queryEmbedding, limit, vectorStoreId } = params;
 
     const embeddingLiteral = `[${queryEmbedding.join(",")}]`;
 
@@ -30,11 +35,11 @@ export class VectorstoreService {
       created_at,
       1 - (embedding <#> $2::vector) AS similarity
       FROM vectors
-      WHERE collection = $1
+      WHERE collection = $1 AND vector_store_id = $4  
       ORDER BY embedding <#> $2::vector
       LIMIT $3
       `,
-      [collection, embeddingLiteral, limit],
+      [collection, embeddingLiteral, limit, vectorStoreId],
     );
   }
 

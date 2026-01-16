@@ -28,11 +28,11 @@ export class AiAgentService {
   }
 
   findById(id: number) {
-    return this.repo.findOneBy({ id });
+    return this.repo.findOne({ where: { id }, relations: ["tools.vectorStore"] });
   }
 
   async chatWithAgent(agentId: number, userPrompt: string, sessionId: string) {
-    const agentData = await this.repo.findOneBy({ id: agentId });
+    const agentData = await this.findById(agentId);
     if (!agentData) {
       throw new Error("AI Agent not found!");
     }

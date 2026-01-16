@@ -30,6 +30,7 @@ export enum ENUM_WEBSOCKET_EVENTS {
 export enum ENUM_TOOL_TYPES {
   HTTP_REQUEST = "http-request",
   FILES_VECTOR_STORE = "files-vector-store",
+  FILES = "files",
 }
 
 export const USER_INFO: Liveblocks["UserMeta"][] = [

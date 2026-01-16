@@ -16,6 +16,7 @@ export class RagService {
       collection: queryParams.collection,
       queryEmbedding,
       limit: queryParams.limit,
+      vectorStoreId: queryParams.vectorStoreId,
     });
   }
 }

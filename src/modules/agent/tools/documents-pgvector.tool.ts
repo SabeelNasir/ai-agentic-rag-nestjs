@@ -8,6 +8,7 @@ import z from "zod";
 export class DocumentsPgVectorTool {
   private _tool;
   private logger = new Logger(DocumentsPgVectorTool.name);
+  private _vectorStoreId: number | undefined;
 
   constructor(private readonly ragService: RagService) {
     this._tool = tool(
@@ -17,6 +18,7 @@ export class DocumentsPgVectorTool {
           collection: ENUM_VECTOR_COLLECTIONS.DOCUMENTS,
           limit,
           search: query,
+          vectorStoreId: this._vectorStoreId,
         });
         return JSON.stringify(searchResult);
       },
@@ -31,7 +33,8 @@ export class DocumentsPgVectorTool {
     );
   }
 
-  getTool() {
+  getTool(vectorStoreId?: number) {
+    this._vectorStoreId = vectorStoreId;
     return this._tool;
   }
 }

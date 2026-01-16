@@ -12,4 +12,8 @@ export class DtoRagQuery {
   @IsNumber()
   @IsOptional()
   limit: number;
+
+  @IsNumber()
+  @IsOptional()
+  vectorStoreId?: number;
 }

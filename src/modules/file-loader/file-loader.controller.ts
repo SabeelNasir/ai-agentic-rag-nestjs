@@ -1,5 +1,5 @@
-import { Controller, Post, Req, UploadedFile, UseInterceptors } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
+import { Controller, Post, Req, UploadedFile, UploadedFiles, UseInterceptors } from "@nestjs/common";
+import { AnyFilesInterceptor, FileInterceptor } from "@nestjs/platform-express";
 import { multerConfig } from "src/config/multer-config";
 import { FileLoaderService } from "./file-loader.service";
 
@@ -15,5 +15,11 @@ export class FileLoaderController {
       message: "Embeddings Jobs initiated and pushed in queue !",
       metadata: result,
     };
+  }
+
+  @Post("save-and-upload")
+  @UseInterceptors(AnyFilesInterceptor(multerConfig))
+  async uploadAndSaveFile(@UploadedFiles() files: Array<Express.Multer.File>) {
+    return this.service.uploadAndSaveFile(files);
   }
 }
