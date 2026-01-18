@@ -8,14 +8,21 @@ import { queuePool } from "../utils/get-bull-queues";
 
 @Injectable()
 export class EmbeddingVectorsQueueService {
+  private readonly _queue: Queue;
   constructor(
     @InjectQueue(ENUM_QUEUES.VECTORS_EMBEDDING) private readonly queue: Queue,
     embeddingService: EmbeddingService,
   ) {
     queuePool.add(queue);
+    this._queue = queue;
   }
 
   addJob(payload: IEmbeddingVectorsQueuePayload) {
     return this.queue.add(payload);
   }
+
+  getQueueStatus() {
+    return this.queue.getJobCounts();
+  }
 }
+

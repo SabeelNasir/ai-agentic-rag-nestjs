@@ -24,7 +24,7 @@ export class DocumentsPgVectorTool {
       },
       {
         name: "documents_vector_store",
-        description: "vectors search tool for documents collection",
+        description: "vectors search tool for documents collection.",
         schema: z.object({
           query: z.string().describe("query to search in vectors table for documents collection"),
           limit: z.number().describe("number of records vectors to limit"),
