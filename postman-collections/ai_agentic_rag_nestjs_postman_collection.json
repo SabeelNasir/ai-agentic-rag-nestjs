@@ -1,0 +1,2316 @@
+{
+  "info": {
+    "_postman_id": "bd9f9915-2605-4a44-8470-7edee6d8dcec",
+    "name": "LangChain Learning",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22784483"
+  },
+  "item": [
+    {
+      "name": "AI Agents",
+      "item": [
+        {
+          "name": "Create Agent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"My Groq Agent\",\r\n    \"model\": \"llama-3.3-70b-versatile\",\r\n    \"description\": \"A custom AI agent for chat tasks\"\r\n    // \"config\": {\r\n    //     \"temperature\": 0.7,\r\n    //     \"max_tokens\": 512\r\n    // }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ai-agents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ai-agents"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Agent",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"My Groq Agent\",\r\n    \"description\": \"A custom AI agent for chat tasks\",\r\n    \"model\": \"llama-3.3-70b-versatile\",\r\n    \"systemMessage\": \"You are Mathematician Expert AI Assistant for my customer !\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ai-agents/68d3e6bbd00ff65fe32ab556",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ai-agents",
+                "68d3e6bbd00ff65fe32ab556"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get AI Agents",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Chat with AI Agent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-session-id",
+                "value": "2000",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"i want to learn maths\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ai-agents/:agentId/chat",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ai-agents",
+                ":agentId",
+                "chat"
+              ],
+              "variable": [
+                {
+                  "key": "agentId",
+                  "value": "68d3e6bbd00ff65fe32ab556"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get AI Agent",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ai-agents/:agentId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ai-agents",
+                ":agentId"
+              ],
+              "variable": [
+                {
+                  "key": "agentId",
+                  "value": "68d3e6bbd00ff65fe32ab556"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Langchain RAG",
+      "item": [
+        {
+          "name": "Chat",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"message\": \"what emily brown currently doing\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/chat/1000",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "chat",
+                "1000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fictional Alarms Chat",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"message\": \"hey\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/alarms/chat",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "alarms",
+                "chat"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "NMS Stats AI Agent",
+      "item": [
+        {
+          "name": "NMS Stats Copilot",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"hey\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/nms-copilot/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nms-copilot",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"prompt\": \"hey\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nms-copilot/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nms-copilot",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "x-custom-header",
+                  "value": "this is custom header"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "400"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"190-lq4/PkJ7zlz2IZ0kbp5PuTC6NJk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 29 Sep 2025 11:57:39 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"sessionId\": \"1759147054149\",\n        \"response\": \"Hello — welcome to Nucleus Statistics. I can fetch today’s ticket stats (by status, network, department) and critical alarm stats for transmission, GPON, or IP (LAST_24_HOURS or LAST_WEEK). \\n\\nExamples: \\n- “Get ticket stats for today” \\n- “Critical alarms for gpon LAST_24_HOURS”\\n\\nWhat would you like me to fetch?\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "NMS Stats Chat Thread",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"I would like to see ticket stats\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/nms-copilot/1759147054149",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nms-copilot",
+                "1759147054149"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Langgraph Stateful Manual Workflow",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"you know what Transmission means\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/nms-copilot-langgraph-workflow/1759152835502",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nms-copilot-langgraph-workflow",
+                "1759152835502"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Coding Agent",
+      "item": [
+        {
+          "name": "Coding AI Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer GRAPH",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"Create a calculator app\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/coding-agent/chat",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coding-agent",
+                "chat"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "NestJS Agents",
+      "item": [
+        {
+          "name": "Chef Agent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"hey\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/agent/chef",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "agent",
+                "chef"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "HR Recuiter Agent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"can u find me employees for Software Engineer role with 10+ years experience\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/hr-recuiter/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "hr-recuiter",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Netflix Shows RAG",
+      "item": [
+        {
+          "name": "Shows List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/netflix-show?limit=20&skip=0",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "netflix-show"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "skip",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Shows Embedding",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"limit\": 100,\r\n    \"skip\": 0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/netflix-show/embeddings",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "netflix-show",
+                "embeddings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Similar Search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/rag?collection=netflix-shows&search=movies of Joe Penna",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "rag"
+              ],
+              "query": [
+                {
+                  "key": "collection",
+                  "value": "netflix-shows",
+                  "type": "text"
+                },
+                {
+                  "key": "search",
+                  "value": "movies of Joe Penna",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Chatbot",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"how many shows Curtis Graham directed\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/agent/netflix-shows",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "agent",
+                "netflix-shows"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "OpenAI Agents Workflows",
+      "item": [
+        {
+          "name": "TWA Docs",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"how much inovices amount is there ?\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/openai-agents/twa-docs",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "openai-agents",
+                "twa-docs"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Chat Model Logs",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/chat-model-log?limit=20&skip=0&order_by=id&order_direction=DESC",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "chat-model-log"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "type": "text"
+                },
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "type": "text"
+                },
+                {
+                  "key": "order_by",
+                  "value": "id",
+                  "type": "text"
+                },
+                {
+                  "key": "order_direction",
+                  "value": "DESC",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Model Wise Cost",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/chat-model-log/model-wise-cost-graph",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "chat-model-log",
+                "model-wise-cost-graph"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Monthly Cost",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/chat-model-log/monthly-cost?start_date=2025-10-01&end_date=2025-10-30",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "chat-model-log",
+                "monthly-cost"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2025-10-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-10-30"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI Agents Dynamic",
+      "item": [
+        {
+          "name": "Get Agents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/ai-agents",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "ai-agents"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Agents",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{ragBaseUrl}}/ai-agents",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "ai-agents"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "9803"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"264b-3EkmteSOm2wDW8a1su1mN0OpSAw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 16 Oct 2025 11:52:30 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"JSON Placeholder APIs Agent\",\n            \"display_name\": \"JSON Placeholder APIs Agent\",\n            \"description\": \"An AI agent capable of making dynamic HTTP calls to JSON Placeholder APIs via tool bindings.\\n# Tools Usage: \\n- When calling 'get_users_list', always pass any one query parameter atleast or confirm from end-user if have none.\\n- When calling 'get_comments_list', always pass any one query parameter atleast or confirm from end-user if have none.\",\n            \"model_provider\": \"openai\",\n            \"model_name\": \"gpt-4.1-2025-04-14\",\n            \"system_prompt\": {\n                \"role\": \"system\",\n                \"content\": \"You are a helpful assistant for making dynamic HTTP calls to the JSONPlaceholder API using tool bindings. Use the tools efficiently, follow their schema, and always return concise Markdown output.\"\n            },\n            \"memory_config\": {\n                \"enabled\": true,\n                \"memory_type\": \"short_term\",\n                \"vector_store\": \"pgvector\"\n            },\n            \"status\": \"active\",\n            \"tools\": [\n                {\n                    \"id\": 1,\n                    \"tool_name\": \"get_posts_list\",\n                    \"config\": {\n                        \"base_url\": \"https://jsonplaceholder.typicode.com/posts\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {\n                            \"id\": {\n                                \"type\": \"number\",\n                                \"required\": false,\n                                \"description\": \"The ID of specific Post to fetch details. Pass this only when user specified the Post ID, other wise keep it undefined.\"\n                            },\n                            \"userId\": {\n                                \"type\": \"number\",\n                                \"required\": true,\n                                \"description\": \"userId of the posts\"\n                            }\n                        },\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\",\n                            \"POST\",\n                            \"PUT\",\n                            \"DELETE\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"Allows the agent to call the JSONPlaceholder API to retrieve posts of a user. If user ID did not mention then ask nicely.\",\n                    \"agent_id\": 1,\n                    \"created_at\": \"2025-10-11T13:36:54.881Z\",\n                    \"updated_at\": \"2025-10-11T13:57:54.068Z\"\n                },\n                {\n                    \"id\": 4,\n                    \"tool_name\": \"get_users_list\",\n                    \"config\": {\n                        \"base_url\": \"https://jsonplaceholder.typicode.com/users\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {\n                            \"id\": {\n                                \"type\": \"number\",\n                                \"required\": false,\n                                \"description\": \"id of a user to query and get user details\"\n                            },\n                            \"name\": {\n                                \"type\": \"string\",\n                                \"required\": false,\n                                \"description\": \"name of a user\"\n                            },\n                            \"email\": {\n                                \"type\": \"string\",\n                                \"required\": false,\n                                \"description\": \"email of a user to query\"\n                            }\n                        },\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"HTTP Request to get users list and details\",\n                    \"agent_id\": 1,\n                    \"created_at\": \"2025-10-11T17:59:13.905Z\",\n                    \"updated_at\": \"2025-10-11T17:59:13.905Z\"\n                },\n                {\n                    \"id\": 2,\n                    \"tool_name\": \"get_comments_list\",\n                    \"config\": {\n                        \"base_url\": \"https://jsonplaceholder.typicode.com/comments\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {\n                            \"email\": {\n                                \"type\": \"string\",\n                                \"required\": false,\n                                \"description\": \"email of the user to fetch comments against user's email\"\n                            },\n                            \"postId\": {\n                                \"type\": \"number\",\n                                \"required\": false,\n                                \"description\": \"The ID of the post to fetch comments for.\"\n                            }\n                        },\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\",\n                            \"POST\",\n                            \"PUT\",\n                            \"DELETE\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"Allows the agent to call the JSONPlaceholder API to fetch comments for a post using the query param 'postId'. Never call this API if no query-parameter is set, ask the end-user otherwise.\",\n                    \"agent_id\": 1,\n                    \"created_at\": \"2025-10-11T13:57:54.068Z\",\n                    \"updated_at\": \"2025-10-11T18:06:13.508Z\"\n                },\n                {\n                    \"id\": 3,\n                    \"tool_name\": \"get_user_albums\",\n                    \"config\": {\n                        \"base_url\": \"https://jsonplaceholder.typicode.com/albums\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {\n                            \"userId\": {\n                                \"type\": \"number\",\n                                \"required\": true,\n                                \"description\": \"id of user to fetch albums against a specific user\"\n                            }\n                        },\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"HTTP Request tool to fetch user albums against a specific user\",\n                    \"agent_id\": 1,\n                    \"created_at\": \"2025-10-11T17:52:50.248Z\",\n                    \"updated_at\": \"2025-10-11T17:52:50.248Z\"\n                }\n            ],\n            \"created_at\": \"2025-10-11T13:36:54.881Z\",\n            \"updated_at\": \"2025-10-11T18:06:13.508Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"HTTP AGent - 1\",\n            \"display_name\": \"HTTP AGent - 1\",\n            \"description\": \"Testing agent and tools\",\n            \"model_provider\": \"groq\",\n            \"model_name\": \"qwen/qwen3-32b\",\n            \"system_prompt\": {\n                \"role\": \"system\",\n                \"content\": \"You are a helpful AI assistant.\"\n            },\n            \"memory_config\": null,\n            \"status\": \"active\",\n            \"tools\": [],\n            \"created_at\": \"2025-10-11T17:41:03.864Z\",\n            \"updated_at\": \"2025-10-11T18:14:45.085Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Nucleus - Stats Chatbot\",\n            \"display_name\": \"Nucleus - Stats Chatbot\",\n            \"description\": \"Chatbot for the Nucleus Ticketing & Alarms statistics\",\n            \"model_provider\": \"groq\",\n            \"model_name\": \"llama-3.1-8b-instant\",\n            \"system_prompt\": {\n                \"role\": \"system\",\n                \"content\": \"You are AI Assistant for my CNOC Central Network monitoring system. Every user on this chat is a NOC engineer, welcome them in a good way. Then tell them these options they can ask you for : \\n1. Get Ticketing Stats for Today\\n2. Know the summary for critical alerts on different network domains\\n3. Realtime Departmental Ticket Stats\\n\\n- Use tools properly where required.\\n\\n# Output Instructions: Always return output in mardown, for stats always return tabular markdown.\\n- If there is something you can't help or understand, return nicely 'I don't know'\"\n            },\n            \"memory_config\": null,\n            \"status\": \"active\",\n            \"tools\": [\n                {\n                    \"id\": 9,\n                    \"tool_name\": \"get_today_ticket_stats\",\n                    \"config\": {\n                        \"base_url\": \"http://47.128.201.248:3000/trouble-ticket-dashboard/trouble-ticket-count\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {},\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\",\n                            \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"http request to get today overall status wise ticket stats\",\n                    \"agent_id\": 3,\n                    \"created_at\": \"2025-10-16T11:22:01.619Z\",\n                    \"updated_at\": \"2025-10-16T11:22:01.619Z\"\n                },\n                {\n                    \"id\": 7,\n                    \"tool_name\": \"get_transmission_alarms_count\",\n                    \"config\": {\n                        \"base_url\": \"http://47.128.201.248:3000/dashboard-stats/counts/transmission\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {\n                            \"period\": {\n                                \"type\": \"string\",\n                                \"required\": true,\n                                \"description\": \"this period is duration values can be (LAST_24_HOURS, LAST_WEEK and LAST_MONTH)\"\n                            },\n                            \"status\": {\n                                \"type\": \"string\",\n                                \"required\": true,\n                                \"description\": \"its default value is 'uncleared' , possible values are (uncleared & cleared)\"\n                            }\n                        },\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\",\n                            \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"http request to get transmission alarms count. also need to send few query params. ask user if not available\",\n                    \"agent_id\": 3,\n                    \"created_at\": \"2025-10-16T11:12:11.212Z\",\n                    \"updated_at\": \"2025-10-16T11:12:11.212Z\"\n                },\n                {\n                    \"id\": 8,\n                    \"tool_name\": \"get_ip_alarms_count\",\n                    \"config\": {\n                        \"base_url\": \"http://47.128.201.248:3000/dashboard-stats/counts/ip\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {\n                            \"period\": {\n                                \"type\": \"string\",\n                                \"required\": true,\n                                \"description\": \"options are 'LAST_WEEK, LAST_24_HOURS & LAST_MONTH'\"\n                            },\n                            \"status\": {\n                                \"type\": \"string\",\n                                \"required\": true,\n                                \"description\": \"default fixed value is 'uncleared'\"\n                            }\n                        },\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\",\n                            \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"http request to get ip alarms count. also need to send few query params. ask user if not available\",\n                    \"agent_id\": 3,\n                    \"created_at\": \"2025-10-16T11:17:52.393Z\",\n                    \"updated_at\": \"2025-10-16T11:17:52.393Z\"\n                },\n                {\n                    \"id\": 5,\n                    \"tool_name\": \"get_departmental_ticket_stats\",\n                    \"config\": {\n                        \"base_url\": \"http://47.128.201.248:3000/trouble-ticket-dashboard/network-wise-departmental-stats\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {},\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\",\n                            \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"API Get Request to get departmental networkwise ticket stats\",\n                    \"agent_id\": 3,\n                    \"created_at\": \"2025-10-11T18:33:12.439Z\",\n                    \"updated_at\": \"2025-10-16T11:19:01.867Z\"\n                }\n            ],\n            \"created_at\": \"2025-10-11T18:33:12.439Z\",\n            \"updated_at\": \"2025-10-16T11:48:50.522Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Nucleus - Stats Bot 2\",\n            \"display_name\": \"Nucleus - Stats Bot 2\",\n            \"description\": \"Nucleus - Stats Bot 2\",\n            \"model_provider\": \"openai\",\n            \"model_name\": \"gpt-4.1-2025-04-14\",\n            \"system_prompt\": {\n                \"role\": \"system\",\n                \"content\": \"You are a helpful AI assistant for Nucleus Centralized NMS stats chatbot. \\n- Use avaialable tools for answering user queries.\\n- Be concise and always return output in markdown.\\n- Always try to return tabular markdown for stats results\"\n            },\n            \"memory_config\": null,\n            \"status\": \"active\",\n            \"tools\": [\n                {\n                    \"id\": 6,\n                    \"tool_name\": \"get_ticket_stats\",\n                    \"config\": {\n                        \"base_url\": \"http://47.128.201.248:3000/trouble-ticket-dashboard/network-wise-departmental-stats\",\n                        \"timeout_ms\": 10000,\n                        \"query_params\": {},\n                        \"default_headers\": {\n                            \"Content-Type\": \"application/json\",\n                            \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                        },\n                        \"methods_allowed\": [\n                            \"GET\"\n                        ]\n                    },\n                    \"is_enabled\": true,\n                    \"description\": \"http request to get ticketing stats\",\n                    \"agent_id\": 4,\n                    \"created_at\": \"2025-10-16T11:04:01.905Z\",\n                    \"updated_at\": \"2025-10-16T11:04:01.905Z\"\n                }\n            ],\n            \"created_at\": \"2025-10-16T11:04:01.905Z\",\n            \"updated_at\": \"2025-10-16T11:05:22.875Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Save Agents",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Agent with Vectors Store - 3\",\r\n    \"display_name\": \"Agent with Vectors Store - 3\",\r\n    \"description\": \"An AI Agent Chat Copilot for chat with Documents via Vector Store of Documents / Files\",\r\n    \"model_provider\": \"openai\",\r\n    \"model_name\": \"gpt-4o-mini\",\r\n    \"system_prompt\": {\r\n        \"role\": \"system\",\r\n        \"content\": \"You are helpful AI Assistant for summarizing and respond chat for Documents using VectorStore & Embeddings Vectors Query  using DocumentsPgVectorTool (documents_vector_store) TOOL.\"\r\n    },\r\n    \"memory_config\": {\r\n        \"enabled\": true,\r\n        \"vector_store\": \"pgvector\",\r\n        \"memory_type\": \"short_term\"\r\n    },\r\n    \"status\": \"active\",\r\n    \"tools\": [\r\n        {\r\n            \"tool_type\": \"files-vector-store\",\r\n            \"tool_name\": \"files-vector-store\",\r\n            \"description\": \"Allow agent to query vectors against specific vector-store of specific files/documents within this vector-store\",\r\n            \"is_enabled\": true,\r\n            \"vectorStore\": {\r\n                \"id\": 1\r\n            }\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/ai-agents",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "ai-agents"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Save Agents",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"http_request_agent\",\r\n    \"display_name\": \"HTTP Request Agent\",\r\n    \"description\": \"An AI agent capable of making dynamic HTTP calls via tool bindings.\",\r\n    \"model_provider\": \"openai\",\r\n    \"model_name\": \"gpt-4o-mini\",\r\n    \"system_prompt\": {\r\n        \"role\": \"system\",\r\n        \"content\": \"You are a helpful assistant that can call external APIs using the HTTP Request tool.\"\r\n    },\r\n    \"memory_config\": {\r\n        \"enabled\": true,\r\n        \"vector_store\": \"pgvector\",\r\n        \"memory_type\": \"short_term\"\r\n    },\r\n    \"status\": \"active\",\r\n    \"tools\": [\r\n        {\r\n            \"tool_name\": \"http-request\",\r\n            \"description\": \"Allows agent to make HTTP GET/POST calls to APIs dynamically.\",\r\n            \"is_enabled\": true,\r\n            \"config\": {\r\n                \"base_url\": \"https://api.example.com\",\r\n                \"default_headers\": {\r\n                    \"Content-Type\": \"application/json\",\r\n                    \"Authorization\": \"Bearer <YOUR_TOKEN>\"\r\n                },\r\n                \"methods_allowed\": [\r\n                    \"GET\",\r\n                    \"POST\",\r\n                    \"PUT\",\r\n                    \"DELETE\"\r\n                ],\r\n                \"timeout_ms\": 10000\r\n            }\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/ai-agents",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "ai-agents"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "994"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3e2-lrwaXysxtFIcKx0B1wt/sydynRw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 11 Oct 2025 13:36:54 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"name\": \"http_request_agent\",\n        \"display_name\": \"HTTP Request Agent\",\n        \"description\": \"An AI agent capable of making dynamic HTTP calls via tool bindings.\",\n        \"model_provider\": \"openai\",\n        \"model_name\": \"gpt-4o-mini\",\n        \"system_prompt\": {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant that can call external APIs using the HTTP Request tool.\"\n        },\n        \"memory_config\": {\n            \"enabled\": true,\n            \"vector_store\": \"pgvector\",\n            \"memory_type\": \"short_term\"\n        },\n        \"status\": \"active\",\n        \"tools\": [\n            {\n                \"tool_name\": \"http-request\",\n                \"description\": \"Allows agent to make HTTP GET/POST calls to APIs dynamically.\",\n                \"is_enabled\": true,\n                \"config\": {\n                    \"base_url\": \"https://api.example.com\",\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\",\n                        \"Authorization\": \"Bearer <YOUR_TOKEN>\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\",\n                        \"POST\",\n                        \"PUT\",\n                        \"DELETE\"\n                    ],\n                    \"timeout_ms\": 10000\n                },\n                \"agent_id\": 1,\n                \"id\": 1,\n                \"created_at\": \"2025-10-11T13:36:54.881Z\",\n                \"updated_at\": \"2025-10-11T13:36:54.881Z\"\n            }\n        ],\n        \"id\": 1,\n        \"created_at\": \"2025-10-11T13:36:54.881Z\",\n        \"updated_at\": \"2025-10-11T13:36:54.881Z\"\n    }\n}"
+            },
+            {
+              "name": "JSON PLaceholder APIs Agent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"JSON Placeholder APIs Agent\",\r\n    \"display_name\": \"JSON Placeholder APIs Agent\",\r\n    \"description\": \"An AI agent capable of making dynamic HTTP calls to JSON Placeholder APIs via tool bindings.\",\r\n    \"model_provider\": \"openai\",\r\n    \"model_name\": \"gpt-4o-mini\",\r\n    \"system_prompt\": {\r\n        \"role\": \"system\",\r\n        \"content\": \"You are a helpful assistant that can call external APIs using the HTTP Request tool.\"\r\n    },\r\n    \"memory_config\": {\r\n        \"enabled\": true,\r\n        \"vector_store\": \"pgvector\",\r\n        \"memory_type\": \"short_term\"\r\n    },\r\n    \"status\": \"active\",\r\n    \"tools\": [\r\n        {\r\n            \"tool_name\": \"JSON Placeholder Posts List\",\r\n            \"description\": \"Allows the agent to call the JSONPlaceholder API to retrieve or manage posts.\",\r\n            \"is_enabled\": true,\r\n            \"config\": {\r\n                \"base_url\": \"https://jsonplaceholder.typicode.com/posts\",\r\n                \"default_headers\": {\r\n                    \"Content-Type\": \"application/json\"\r\n                },\r\n                \"methods_allowed\": [\r\n                    \"GET\",\r\n                    \"POST\",\r\n                    \"PUT\",\r\n                    \"DELETE\"\r\n                ],\r\n                \"timeout_ms\": 10000\r\n            },\r\n            \"agent_id\": 1,\r\n            \"id\": 1,\r\n            \"created_at\": \"2025-10-11T13:36:54.881Z\",\r\n            \"updated_at\": \"2025-10-11T13:36:54.881Z\"\r\n        },\r\n        {\r\n            \"tool_name\": \"JSON Placeholder Comments List\",\r\n            \"description\": \"Allows the agent to call the JSONPlaceholder API to fetch comments for a post using the query param 'postId'.\",\r\n            \"is_enabled\": true,\r\n            \"config\": {\r\n                \"base_url\": \"https://jsonplaceholder.typicode.com/comments\",\r\n                \"default_headers\": {\r\n                    \"Content-Type\": \"application/json\"\r\n                },\r\n                \"methods_allowed\": [\r\n                    \"GET\",\r\n                    \"POST\",\r\n                    \"PUT\",\r\n                    \"DELETE\"\r\n                ],\r\n                \"timeout_ms\": 10000,\r\n                \"query_params\": {\r\n                    \"postId\": {\r\n                        \"type\": \"number\",\r\n                        \"required\": true,\r\n                        \"description\": \"The ID of the post to fetch comments for.\"\r\n                    }\r\n                }\r\n            },\r\n            \"agent_id\": 1\r\n        }\r\n    ],\r\n    \"id\": 1,\r\n    \"created_at\": \"2025-10-11T13:36:54.881Z\",\r\n    \"updated_at\": \"2025-10-11T13:36:54.881Z\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/ai-agents",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "ai-agents"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1649"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"671-VfGXyIJqfx58ef5GyzMLeZdXG+4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 11 Oct 2025 13:57:54 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"name\": \"JSON Placeholder APIs Agent\",\n        \"display_name\": \"JSON Placeholder APIs Agent\",\n        \"description\": \"An AI agent capable of making dynamic HTTP calls to JSON Placeholder APIs via tool bindings.\",\n        \"model_provider\": \"openai\",\n        \"model_name\": \"gpt-4o-mini\",\n        \"system_prompt\": {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant that can call external APIs using the HTTP Request tool.\"\n        },\n        \"memory_config\": {\n            \"enabled\": true,\n            \"vector_store\": \"pgvector\",\n            \"memory_type\": \"short_term\"\n        },\n        \"status\": \"active\",\n        \"tools\": [\n            {\n                \"tool_name\": \"JSON Placeholder Posts List\",\n                \"description\": \"Allows the agent to call the JSONPlaceholder API to retrieve or manage posts.\",\n                \"is_enabled\": true,\n                \"config\": {\n                    \"base_url\": \"https://jsonplaceholder.typicode.com/posts\",\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\",\n                        \"POST\",\n                        \"PUT\",\n                        \"DELETE\"\n                    ],\n                    \"timeout_ms\": 10000\n                },\n                \"agent_id\": 1,\n                \"id\": 1,\n                \"created_at\": \"2025-10-11T13:36:54.881Z\",\n                \"updated_at\": \"2025-10-11T13:57:54.068Z\"\n            },\n            {\n                \"tool_name\": \"JSON Placeholder Comments List\",\n                \"description\": \"Allows the agent to call the JSONPlaceholder API to fetch comments for a post using the query param 'postId'.\",\n                \"is_enabled\": true,\n                \"config\": {\n                    \"base_url\": \"https://jsonplaceholder.typicode.com/comments\",\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\",\n                        \"POST\",\n                        \"PUT\",\n                        \"DELETE\"\n                    ],\n                    \"timeout_ms\": 10000,\n                    \"query_params\": {\n                        \"postId\": {\n                            \"type\": \"number\",\n                            \"required\": true,\n                            \"description\": \"The ID of the post to fetch comments for.\"\n                        }\n                    }\n                },\n                \"agent_id\": 1,\n                \"id\": 2,\n                \"created_at\": \"2025-10-11T13:57:54.068Z\",\n                \"updated_at\": \"2025-10-11T13:57:54.068Z\"\n            }\n        ],\n        \"id\": 1,\n        \"created_at\": \"2025-10-11T13:36:54.881Z\",\n        \"updated_at\": \"2025-10-11T13:36:54.881Z\"\n    }\n}"
+            },
+            {
+              "name": "New Agent Saving Sample",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"New - JSON Placeholder APIs Agent\",\r\n    \"display_name\": \"JSON Placeholder APIs Agent\",\r\n    \"description\": \"An AI agent capable of making dynamic HTTP calls to JSON Placeholder APIs via tool bindings.\",\r\n    \"model_provider\": \"openai\",\r\n    \"model_name\": \"gpt-4o-mini\",\r\n    \"system_prompt\": {\r\n        \"role\": \"system\",\r\n        \"content\": \"You are a helpful assistant that can call external APIs using the HTTP Request tool.\"\r\n    },\r\n    \"memory_config\": {\r\n        \"enabled\": true,\r\n        \"vector_store\": \"pgvector\",\r\n        \"memory_type\": \"short_term\"\r\n    },\r\n    \"status\": \"active\",\r\n    \"tools\": [\r\n        {\r\n            \"tool_name\": \"JSON Placeholder Posts List\",\r\n            \"description\": \"Allows the agent to call the JSONPlaceholder API to retrieve or manage posts.\",\r\n            \"is_enabled\": true,\r\n            \"config\": {\r\n                \"base_url\": \"https://jsonplaceholder.typicode.com/posts\",\r\n                \"default_headers\": {\r\n                    \"Content-Type\": \"application/json\"\r\n                },\r\n                \"methods_allowed\": [\r\n                    \"GET\",\r\n                    \"POST\",\r\n                    \"PUT\",\r\n                    \"DELETE\"\r\n                ],\r\n                \"timeout_ms\": 10000\r\n            }\r\n        },\r\n        {\r\n            \"tool_name\": \"JSON Placeholder Comments List\",\r\n            \"description\": \"Allows the agent to call the JSONPlaceholder API to fetch comments for a post using the query param 'postId'.\",\r\n            \"is_enabled\": true,\r\n            \"config\": {\r\n                \"base_url\": \"https://jsonplaceholder.typicode.com/comments\",\r\n                \"default_headers\": {\r\n                    \"Content-Type\": \"application/json\"\r\n                },\r\n                \"methods_allowed\": [\r\n                    \"GET\",\r\n                    \"POST\",\r\n                    \"PUT\",\r\n                    \"DELETE\"\r\n                ],\r\n                \"timeout_ms\": 10000,\r\n                \"query_params\": {\r\n                    \"postId\": {\r\n                        \"type\": \"number\",\r\n                        \"required\": true,\r\n                        \"description\": \"The ID of the post to fetch comments for.\"\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/ai-agents",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "ai-agents"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1655"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"677-wI+Tv1hmouz5Xy5MQz/xRLu8vEo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 07 Dec 2025 17:20:39 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"name\": \"New - JSON Placeholder APIs Agent\",\n        \"display_name\": \"JSON Placeholder APIs Agent\",\n        \"description\": \"An AI agent capable of making dynamic HTTP calls to JSON Placeholder APIs via tool bindings.\",\n        \"model_provider\": \"openai\",\n        \"model_name\": \"gpt-4o-mini\",\n        \"system_prompt\": {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant that can call external APIs using the HTTP Request tool.\"\n        },\n        \"memory_config\": {\n            \"enabled\": true,\n            \"vector_store\": \"pgvector\",\n            \"memory_type\": \"short_term\"\n        },\n        \"status\": \"active\",\n        \"tools\": [\n            {\n                \"tool_name\": \"JSON Placeholder Posts List\",\n                \"description\": \"Allows the agent to call the JSONPlaceholder API to retrieve or manage posts.\",\n                \"is_enabled\": true,\n                \"config\": {\n                    \"base_url\": \"https://jsonplaceholder.typicode.com/posts\",\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\",\n                        \"POST\",\n                        \"PUT\",\n                        \"DELETE\"\n                    ],\n                    \"timeout_ms\": 10000\n                },\n                \"agent_id\": 4,\n                \"id\": 4,\n                \"created_at\": \"2025-12-07T17:20:39.307Z\",\n                \"updated_at\": \"2025-12-07T17:20:39.307Z\"\n            },\n            {\n                \"tool_name\": \"JSON Placeholder Comments List\",\n                \"description\": \"Allows the agent to call the JSONPlaceholder API to fetch comments for a post using the query param 'postId'.\",\n                \"is_enabled\": true,\n                \"config\": {\n                    \"base_url\": \"https://jsonplaceholder.typicode.com/comments\",\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\",\n                        \"POST\",\n                        \"PUT\",\n                        \"DELETE\"\n                    ],\n                    \"timeout_ms\": 10000,\n                    \"query_params\": {\n                        \"postId\": {\n                            \"type\": \"number\",\n                            \"required\": true,\n                            \"description\": \"The ID of the post to fetch comments for.\"\n                        }\n                    }\n                },\n                \"agent_id\": 4,\n                \"id\": 5,\n                \"created_at\": \"2025-12-07T17:20:39.307Z\",\n                \"updated_at\": \"2025-12-07T17:20:39.307Z\"\n            }\n        ],\n        \"id\": 4,\n        \"created_at\": \"2025-12-07T17:20:39.307Z\",\n        \"updated_at\": \"2025-12-07T17:20:39.307Z\"\n    }\n}"
+            },
+            {
+              "name": "Save with Vector Store",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Agent with Vectors Store - 3\",\r\n    \"display_name\": \"Agent with Vectors Store - 3\",\r\n    \"description\": \"An AI Agent Chat Copilot for chat with Documents via Vector Store of Documents / Files\",\r\n    \"model_provider\": \"openai\",\r\n    \"model_name\": \"gpt-4o-mini\",\r\n    \"system_prompt\": {\r\n        \"role\": \"system\",\r\n        \"content\": \"You are helpful AI Assistant for summarizing and respond chat for Documents using VectorStore & Embeddings Vectors Query  using DocumentsPgVectorTool (documents_vector_store) TOOL.\"\r\n    },\r\n    \"memory_config\": {\r\n        \"enabled\": true,\r\n        \"vector_store\": \"pgvector\",\r\n        \"memory_type\": \"short_term\"\r\n    },\r\n    \"status\": \"active\",\r\n    \"tools\": [\r\n        {\r\n            \"tool_type\": \"files-vector-store\",\r\n            \"tool_name\": \"files-vector-store\",\r\n            \"description\": \"Allow agent to query vectors against specific vector-store of specific files/documents within this vector-store\",\r\n            \"is_enabled\": true,\r\n            \"vectorStore\": {\r\n                \"id\": 1\r\n            }\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/ai-agents",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "ai-agents"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1049"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"419-bsPptjruhakzE/Q3LiH9IpByn5M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 16 Jan 2026 14:08:25 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"name\": \"Agent with Vectors Store - 3\",\n        \"display_name\": \"Agent with Vectors Store - 3\",\n        \"description\": \"An AI Agent Chat Copilot for chat with Documents via Vector Store of Documents / Files\",\n        \"model_provider\": \"openai\",\n        \"model_name\": \"gpt-4o-mini\",\n        \"system_prompt\": {\n            \"role\": \"system\",\n            \"content\": \"You are helpful AI Assistant for summarizing and respond chat for Documents using VectorStore & Embeddings Vectors Query  using DocumentsPgVectorTool (documents_vector_store) TOOL.\"\n        },\n        \"memory_config\": {\n            \"enabled\": true,\n            \"vector_store\": \"pgvector\",\n            \"memory_type\": \"short_term\"\n        },\n        \"status\": \"active\",\n        \"tools\": [\n            {\n                \"tool_type\": \"files-vector-store\",\n                \"tool_name\": \"files-vector-store\",\n                \"description\": \"Allow agent to query vectors against specific vector-store of specific files/documents within this vector-store\",\n                \"is_enabled\": true,\n                \"vectorStore\": {\n                    \"id\": 1\n                },\n                \"agent_id\": 7,\n                \"config\": null,\n                \"id\": 12,\n                \"created_at\": \"2026-01-16T14:08:25.781Z\",\n                \"updated_at\": \"2026-01-16T14:08:25.781Z\"\n            }\n        ],\n        \"id\": 7,\n        \"created_at\": \"2026-01-16T14:08:25.781Z\",\n        \"updated_at\": \"2026-01-16T14:08:25.781Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Agent By ID",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/ai-agents/:agentId",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "ai-agents",
+                ":agentId"
+              ],
+              "variable": [
+                {
+                  "key": "agentId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Agent By ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{ragBaseUrl}}/ai-agents/:agentId",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "ai-agents",
+                    ":agentId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "agentId",
+                      "value": "3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "4477"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"117d-u4R9EjwiVkaTrsI4MF5j4kTIF6k\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 16 Oct 2025 11:36:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"id\": 3,\n        \"name\": \"Nucleus - Stats Chatbot\",\n        \"display_name\": \"Nucleus - Stats Chatbot\",\n        \"description\": \"Chatbot for the Nucleus Ticketing & Alarms statistics\",\n        \"model_provider\": \"groq\",\n        \"model_name\": \"llama-3.1-8b-instant\",\n        \"system_prompt\": {\n            \"role\": \"system\",\n            \"content\": \"You are AI Assistant for my CNOC Central Network monitoring system. Every user on this chat is a NOC engineer, welcome them in a good way. Then tell them these options they can ask you for : \\n1. Get Ticketing Stats for Today\\n2. Know the summary for critical alerts on different network domains\\n3. Realtime Departmental Ticket Stats\\n\\n- Use tools properly where required.\\n\\n# Output Instructions: Always return output in mardown, for stats always return tabular markdown.\\n- If there is something you can't help or understand, return nicely 'I don't know'\"\n        },\n        \"memory_config\": null,\n        \"status\": \"active\",\n        \"tools\": [\n            {\n                \"id\": 5,\n                \"tool_name\": \"get_departmental_ticket_stats\",\n                \"config\": {\n                    \"base_url\": \"http://47.128.201.248:3000/trouble-ticket-dashboard/network-wise-departmental-stats\",\n                    \"timeout_ms\": 10000,\n                    \"query_params\": {},\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\",\n                        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\"\n                    ]\n                },\n                \"is_enabled\": true,\n                \"description\": \"API Get Request to get departmental networkwise ticket stats\",\n                \"agent_id\": 3,\n                \"created_at\": \"2025-10-11T18:33:12.439Z\",\n                \"updated_at\": \"2025-10-16T11:19:01.867Z\"\n            },\n            {\n                \"id\": 9,\n                \"tool_name\": \"get_today_ticket_stats\",\n                \"config\": {\n                    \"base_url\": \"http://47.128.201.248:3000/trouble-ticket-dashboard/trouble-ticket-count\",\n                    \"timeout_ms\": 10000,\n                    \"query_params\": {},\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\",\n                        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\"\n                    ]\n                },\n                \"is_enabled\": true,\n                \"description\": \"http request to get today overall status wise ticket stats\",\n                \"agent_id\": 3,\n                \"created_at\": \"2025-10-16T11:22:01.619Z\",\n                \"updated_at\": \"2025-10-16T11:22:01.619Z\"\n            },\n            {\n                \"id\": 7,\n                \"tool_name\": \"get_transmission_alarms_count\",\n                \"config\": {\n                    \"base_url\": \"http://47.128.201.248:3000/dashboard-stats/counts/transmission\",\n                    \"timeout_ms\": 10000,\n                    \"query_params\": {\n                        \"period\": {\n                            \"type\": \"string\",\n                            \"required\": true,\n                            \"description\": \"this period is duration values can be (LAST_24_HOURS, LAST_WEEK and LAST_MONTH)\"\n                        },\n                        \"status\": {\n                            \"type\": \"string\",\n                            \"required\": true,\n                            \"description\": \"its default value is 'uncleared' , possible values are (uncleared & cleared)\"\n                        }\n                    },\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\",\n                        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\"\n                    ]\n                },\n                \"is_enabled\": true,\n                \"description\": \"http request to get transmission alarms count. also need to send few query params. ask user if not available\",\n                \"agent_id\": 3,\n                \"created_at\": \"2025-10-16T11:12:11.212Z\",\n                \"updated_at\": \"2025-10-16T11:12:11.212Z\"\n            },\n            {\n                \"id\": 8,\n                \"tool_name\": \"get_ip_alarms_count\",\n                \"config\": {\n                    \"base_url\": \"http://47.128.201.248:3000/dashboard-stats/counts/ip\",\n                    \"timeout_ms\": 10000,\n                    \"query_params\": {\n                        \"period\": {\n                            \"type\": \"string\",\n                            \"required\": true,\n                            \"description\": \"options are 'LAST_WEEK, LAST_24_HOURS & LAST_MONTH'\"\n                        },\n                        \"status\": {\n                            \"type\": \"string\",\n                            \"required\": true,\n                            \"description\": \"default fixed value is 'uncleared'\"\n                        }\n                    },\n                    \"default_headers\": {\n                        \"Content-Type\": \"application/json\",\n                        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhYmVlbC5uYXNpciIsInVzZXJJZCI6NjAsImlkIjo2MCwiZW1haWwiOiJzYWJlZWwubmFzaXJAbnVjbGV1cy5jb20iLCJzdWJkZXBhcnRtZW50SWQiOjksImlhdCI6MTc2MDYxMjU5MiwiZXhwIjoxNzYxMjE3MzkyfQ.QnqQkE7htPTHyLlnZtwyf2_2pnsbh2h2v5NIgwW7xuE\"\n                    },\n                    \"methods_allowed\": [\n                        \"GET\"\n                    ]\n                },\n                \"is_enabled\": true,\n                \"description\": \"http request to get ip alarms count. also need to send few query params. ask user if not available\",\n                \"agent_id\": 3,\n                \"created_at\": \"2025-10-16T11:17:52.393Z\",\n                \"updated_at\": \"2025-10-16T11:17:52.393Z\"\n            }\n        ],\n        \"created_at\": \"2025-10-11T18:33:12.439Z\",\n        \"updated_at\": \"2025-10-16T11:34:59.994Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Chat with Agent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"hey\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/ai-agents/:agentId/chat",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "ai-agents",
+                ":agentId",
+                "chat"
+              ],
+              "variable": [
+                {
+                  "key": "agentId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "File Loader & Embeddings",
+      "item": [
+        {
+          "name": "Upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "28a8ddfa-27c2-4e02-aaac-3e9716ecdac2",
+                  "src": "/C:/Users/sabeel.nasir/Downloads/Hashir_Ijaz.pdf"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/file-loader/upload",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "file-loader",
+                "upload"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "New Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "uuid": "28a8ddfa-27c2-4e02-aaac-3e9716ecdac2",
+                      "src": "/C:/Users/sabeel.nasir/Downloads/Hashir_Ijaz.pdf"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/file-loader/upload",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "file-loader",
+                    "upload"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "878"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"36e-j2DeF23xqFKUSeRMx7yreM7Dtvs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 17 Oct 2025 09:58:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"message\": \"Embeddings Jobs initiated and pushed in queue !\",\n        \"metadata\": {\n            \"source\": \"uploads\\\\1760695093358-509871280-Hashir_Ijaz.pdf\",\n            \"pdf\": {\n                \"version\": \"1.10.100\",\n                \"info\": {\n                    \"PDFFormatVersion\": \"1.7\",\n                    \"IsAcroFormPresent\": false,\n                    \"IsXFAPresent\": false,\n                    \"Author\": \"hloom.com\",\n                    \"Creator\": \"Microsoft® Word for Microsoft 365\",\n                    \"Producer\": \"Microsoft® Word for Microsoft 365\",\n                    \"CreationDate\": \"D:20250403022652-07'00'\",\n                    \"ModDate\": \"D:20250403022652-07'00'\"\n                },\n                \"metadata\": {\n                    \"_metadata\": {\n                        \"pdf:producer\": \"Microsoft® Word for Microsoft 365\",\n                        \"dc:creator\": \"hloom.com\",\n                        \"xmp:creatortool\": \"Microsoft® Word for Microsoft 365\",\n                        \"xmp:createdate\": \"2025-04-03T02:26:52-07:00\",\n                        \"xmp:modifydate\": \"2025-04-03T02:26:52-07:00\",\n                        \"xmpmm:documentid\": \"uuid:9FC086D0-46A0-4E64-A6DB-FF4260E464D5\",\n                        \"xmpmm:instanceid\": \"uuid:9FC086D0-46A0-4E64-A6DB-FF4260E464D5\"\n                    }\n                },\n                \"totalPages\": 3\n            },\n            \"loc\": {\n                \"pageNumber\": 1\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Save&Upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "files",
+                  "type": "file",
+                  "uuid": "38d9be59-710e-47e0-bd21-8ad272061bc5",
+                  "src": [
+                    "/C:/Users/sabeel.nasir/Documents/office-docs/CVs-Shortlisted/Jan-2026-Tech-Leadership-STL/Shortlisted/Adnan Ahmed - Resume.pdf",
+                    "/C:/Users/sabeel.nasir/Documents/office-docs/CVs-Shortlisted/Jan-2026-Tech-Leadership-STL/Shortlisted/Arslaan_Ejaz_Senior_technology_leader.pdf"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/file-loader/save-and-upload",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "file-loader",
+                "save-and-upload"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Save&Upload",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "files",
+                      "type": "file",
+                      "uuid": "38d9be59-710e-47e0-bd21-8ad272061bc5",
+                      "src": [
+                        "/C:/Users/sabeel.nasir/Documents/office-docs/CVs-Shortlisted/Jan-2026-Tech-Leadership-STL/Shortlisted/Adnan Ahmed - Resume.pdf",
+                        "/C:/Users/sabeel.nasir/Documents/office-docs/CVs-Shortlisted/Jan-2026-Tech-Leadership-STL/Shortlisted/Arslaan_Ejaz_Senior_technology_leader.pdf"
+                      ]
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/file-loader/save-and-upload",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "file-loader",
+                    "save-and-upload"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "503"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1f7-8LAtLW9tKkOhjWbITiG9uBkMr9g\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 16 Jan 2026 11:59:00 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"original_name\": \"Adnan Ahmed - Resume.pdf\",\n            \"mime_type\": \"application/pdf\",\n            \"file_name\": \"Adnan Ahmed - Resume.pdf-1768564740325\",\n            \"file_size_kb\": 207.06640625,\n            \"created_by\": null,\n            \"id\": 1,\n            \"created_at\": \"2026-01-16T11:59:00.432Z\"\n        },\n        {\n            \"original_name\": \"Arslaan_Ejaz_Senior_technology_leader.pdf\",\n            \"mime_type\": \"application/pdf\",\n            \"file_name\": \"Arslaan_Ejaz_Senior_technology_leader.pdf-1768564740327\",\n            \"file_size_kb\": 226.671875,\n            \"created_by\": null,\n            \"id\": 2,\n            \"created_at\": \"2026-01-16T11:59:00.438Z\"\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Liveblocks",
+      "item": [
+        {
+          "name": "Liveblocks Auth",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"roomId\": \"document-1000\",\r\n    \"userInfo\": {\r\n        \"name\": \"Sabeel Nasir\",\r\n        \"id\": \"100\",\r\n        \"email\": \"sabeel.nasir@tw1.com\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/liveblocks/auth",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "liveblocks",
+                "auth"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Liveblocks Auth Token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"roomId\": \"document-1000\",\r\n    \"userInfo\": {\r\n        \"name\": \"Sabeel Nasir\",\r\n        \"id\": \"100\",\r\n        \"email\": \"sabeel.nasir@tw1.com\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/liveblocks/auth",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "liveblocks",
+                    "auth"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "788"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"314-b0U9m95glNS9za1YtFSxLRqU1wU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Oct 2025 09:52:14 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJrIjoiYWNjIiwicGlkIjoiNjhmYTYyMzdkZmNiMjA3MGNiOThjN2VjIiwidWlkIjoiMTAwIiwicGVybXMiOnsiZG9jdW1lbnQtMTAwMCI6WyJyb29tOndyaXRlIiwiY29tbWVudHM6d3JpdGUiXX0sInVpIjp7Im5hbWUiOiJTYWJlZWwgTmFzaXIiLCJpZCI6IjEwMCIsImVtYWlsIjoic2FiZWVsLm5hc2lyQHR3MS5jb20ifSwibWNwciI6MTAsInRpZCI6ImRlZmF1bHQiLCJhaSI6dHJ1ZSwiaWF0IjoxNzYxNDcyMzMyLCJleHAiOjE3NjE0NzU5MzIsImp0aSI6Im1iUS1wbkx1ZWhEdCJ9.wCp9Sb7yz_gbKyWRUIMW854Vd0-3sO7UMOXFnT00vrDuQM6OR87_B3lRGQdDEfnheVdiwUHkoPZdmkBlEe9eB3padijXXIDLaBJBpepF-CN1kT81ha0kjYdXeveE-ChKwYggTTnQV_pUbXVCWva14KD_BmX07cJFgBP-tZuUnnNHqasvltlqxqQjXrS8LwZX3zTwWetSHp015V8SzyFaMt_IUZUhV5byhjeN--UeevPuvhKT45uX1Yq9FxI6VSJmlOKn-SqBXusJpTE4cNkzNF6zilbwtYuzXFI-tEWAMZBruhS7kWzeiY0oDC9yJPDD0TM332cwoM87217TO7nhHQ\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Documents Editor",
+      "item": [
+        {
+          "name": "Save Document",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 2,\r\n    \"content\": \"this is testing document content for modified v2\",\r\n    \"liveblocksRoomId\": \"document-1001\",\r\n    \"liveblocks_room_id\": null,\r\n    \"created_by\": null,\r\n    \"updated_by\": null,\r\n    \"title\": \"Untitled document\",\r\n    \"created_at\": \"2025-10-26T08:51:07.785Z\",\r\n    \"updated_at\": \"2025-10-26T08:51:07.785Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/documents",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "documents"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Save DOcument",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"content\": \"this is testing document content for docu 2\",\r\n    \"liveblocksRoomId\": \"document-1001\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/documents",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "297"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"129-xW/v6t8L1as6JfedMMhXdQhw39g\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Oct 2025 13:51:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"content\": \"this is testing document content for docu 2\",\n        \"liveblocksRoomId\": \"document-1001\",\n        \"liveblocks_room_id\": null,\n        \"created_by\": null,\n        \"updated_by\": null,\n        \"id\": 2,\n        \"title\": \"Untitled document\",\n        \"created_at\": \"2025-10-26T08:51:07.785Z\",\n        \"updated_at\": \"2025-10-26T08:51:07.785Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Doc AI Completions",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\": \"We are trying to deliver this project, for that need to prepare a document\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/documents/ai-completions",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "documents",
+                "ai-completions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Docs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/documents?limit=10&skip=0",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "documents"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "type": "text"
+                },
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Document Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/documents/:id",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "documents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SSH Chat Agents",
+      "item": [
+        {
+          "name": "SSH Agent Chat",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"i want to test ssh connectivity\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/agent/ssh-chat/1764510497098",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "agent",
+                "ssh-chat",
+                "1764510497098"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "SSH Agent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"prompt\": \"i want to test ssh connectivity\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{ragBaseUrl}}/agent/ssh-chat/1764510497098",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "ssh-chat",
+                    "1764510497098"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "526"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"20e-YStVend+Y6xHLNuI/4vKZLRRqjE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 30 Nov 2025 14:02:16 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"sessionId\": \"1764510497098\",\n        \"response\": \"Great! To test SSH connectivity, I’ll need some details:\\n\\n1. Hostname or IP address of the server you want to connect to\\n2. SSH username\\n3. (Optional) Port number (default is 22)\\n4. Authentication method:\\n   - Password (tell me the password)\\n   - Private key (paste the key or upload)\\n\\nPlease provide these details (you may omit sensitive info or redact passwords/keys if you prefer). Once you do, I’ll proceed with the SSH connectivity test.\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Postgres Agent Chat",
+      "item": [
+        {
+          "name": "Postgres Chat Agent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"hey what can you do ?\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/agent/postgres-chat",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "agent",
+                "postgres-chat"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Vector Store & Files Mapping",
+      "item": [
+        {
+          "name": "Create Vector Store",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"store_label\": \"Technical Leader CVs\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/vector-store",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "vector-store"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload File in Vector Store",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "files",
+                  "type": "file",
+                  "uuid": "12ed82a2-6b46-47ca-a177-ee7b0df7e286",
+                  "src": [
+                    "/C:/Users/sabeel.nasir/Documents/office-docs/CVs-Shortlisted/Jan-2026-Tech-Leadership-STL/1. Technical Lead CVs/MohsinAli.pdf",
+                    "/C:/Users/sabeel.nasir/Documents/office-docs/CVs-Shortlisted/Jan-2026-Tech-Leadership-STL/1. Technical Lead CVs/mubasharcv.pdf"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/vector-store/:id/upload-file",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "vector-store",
+                ":id",
+                "upload-file"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Vector Stores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/vector-store",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "vector-store"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get VectorStore By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/vector-store/:id",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "vector-store",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get VectorStore By ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{ragBaseUrl}}/vector-store/:id",
+                  "host": [
+                    "{{ragBaseUrl}}"
+                  ],
+                  "path": [
+                    "vector-store",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2540"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"9ec-5dhE9bMUnfBzXnl7cI1vpE6zzaA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 16 Jan 2026 14:29:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"id\": 1,\n        \"store_label\": \"Technical Leader CVs\",\n        \"last_used_at\": null,\n        \"store_size_kb\": null,\n        \"created_at\": \"2026-01-16T12:40:07.654Z\",\n        \"created_by\": null,\n        \"updated_at\": \"2026-01-16T12:40:07.654Z\",\n        \"files\": [\n            {\n                \"id\": 1,\n                \"uploadFile\": {\n                    \"id\": 3,\n                    \"original_name\": \"Adnan Ahmed - Resume.pdf\",\n                    \"file_name\": \"Adnan Ahmed - Resume.pdf-1768567843226\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"207.06640625\",\n                    \"created_at\": \"2026-01-16T12:50:43.657Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T12:50:43.726Z\",\n                \"created_by\": null\n            },\n            {\n                \"id\": 2,\n                \"uploadFile\": {\n                    \"id\": 4,\n                    \"original_name\": \"Ahsan-Siddiqui - ATS - 2026.pdf\",\n                    \"file_name\": \"Ahsan-Siddiqui - ATS - 2026.pdf-1768567843239\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"129.6689453125\",\n                    \"created_at\": \"2026-01-16T12:50:43.658Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T12:50:43.727Z\",\n                \"created_by\": null\n            },\n            {\n                \"id\": 3,\n                \"uploadFile\": {\n                    \"id\": 6,\n                    \"original_name\": \"MohsinAli.pdf\",\n                    \"file_name\": \"MohsinAli.pdf-1768568820530\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"228.208984375\",\n                    \"created_at\": \"2026-01-16T13:07:01.087Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T13:07:01.135Z\",\n                \"created_by\": null\n            },\n            {\n                \"id\": 4,\n                \"uploadFile\": {\n                    \"id\": 5,\n                    \"original_name\": \"mubasharcv.pdf\",\n                    \"file_name\": \"mubasharcv.pdf-1768568820528\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"114.35546875\",\n                    \"created_at\": \"2026-01-16T13:07:01.074Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T13:07:01.135Z\",\n                \"created_by\": null\n            },\n            {\n                \"id\": 5,\n                \"uploadFile\": {\n                    \"id\": 8,\n                    \"original_name\": \"mubasharcv.pdf\",\n                    \"file_name\": \"mubasharcv.pdf-1768569000694\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"114.35546875\",\n                    \"created_at\": \"2026-01-16T13:10:00.857Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T13:10:00.892Z\",\n                \"created_by\": null\n            },\n            {\n                \"id\": 6,\n                \"uploadFile\": {\n                    \"id\": 7,\n                    \"original_name\": \"MohsinAli.pdf\",\n                    \"file_name\": \"MohsinAli.pdf-1768569000690\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"228.208984375\",\n                    \"created_at\": \"2026-01-16T13:10:00.845Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T13:10:00.892Z\",\n                \"created_by\": null\n            },\n            {\n                \"id\": 7,\n                \"uploadFile\": {\n                    \"id\": 9,\n                    \"original_name\": \"mubasharcv.pdf\",\n                    \"file_name\": \"mubasharcv.pdf-1768569053126\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"114.35546875\",\n                    \"created_at\": \"2026-01-16T13:10:53.269Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T13:10:53.296Z\",\n                \"created_by\": null\n            },\n            {\n                \"id\": 8,\n                \"uploadFile\": {\n                    \"id\": 10,\n                    \"original_name\": \"MohsinAli.pdf\",\n                    \"file_name\": \"MohsinAli.pdf-1768569053133\",\n                    \"mime_type\": \"application/pdf\",\n                    \"file_size_kb\": \"228.208984375\",\n                    \"created_at\": \"2026-01-16T13:10:53.270Z\",\n                    \"created_by\": null\n                },\n                \"created_at\": \"2026-01-16T13:10:53.296Z\",\n                \"created_by\": null\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Vector Store",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"store_label\": \"Tech Leader CVs Vector Storee - 1\",\r\n    \"store_size_kb\": 9388.55\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{ragBaseUrl}}/vector-store/:id",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "vector-store",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Embedding Vectors Queue",
+      "item": [
+        {
+          "name": "Get Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ragBaseUrl}}/embedding-vectors-queue/status",
+              "host": [
+                "{{ragBaseUrl}}"
+              ],
+              "path": [
+                "embedding-vectors-queue",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Base",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/user",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "user"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Chat Copilot",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-session-id",
+            "value": "1003",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"prompt\": \"what I asked you before ?\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/chat",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "chat"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Chat Copilot",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-session-id",
+                "value": "1005",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"and which month got the highest alert of this alert\"\r\n}   ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/chat",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "chat"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "x-custom-header",
+              "value": "this is custom header"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "999"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"3e7-un9bPJOcbbyju5QuYhccqT+FOak\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 26 Sep 2025 14:49:34 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"lc\": 1,\n        \"type\": \"constructor\",\n        \"id\": [\n            \"langchain_core\",\n            \"messages\",\n            \"AIMessage\"\n        ],\n        \"kwargs\": {\n            \"content\": \"The “Alarm set for Juniper device” alert peaked in **March\\u202f2025**, with **40,787 occurrences** during that month.\",\n            \"additional_kwargs\": {},\n            \"tool_calls\": [],\n            \"invalid_tool_calls\": [],\n            \"usage_metadata\": {\n                \"input_tokens\": 1786,\n                \"output_tokens\": 64,\n                \"total_tokens\": 1850\n            },\n            \"response_metadata\": {\n                \"tokenUsage\": {\n                    \"completionTokens\": 64,\n                    \"promptTokens\": 1786,\n                    \"totalTokens\": 1850\n                },\n                \"finish_reason\": \"stop\",\n                \"id\": \"chatcmpl-31d5e914-7b39-41a1-9a04-d6c0434c76e9\",\n                \"object\": \"chat.completion\",\n                \"created\": 1758898173,\n                \"model\": \"openai/gpt-oss-20b\",\n                \"usage\": {\n                    \"queue_time\": 0.044106178,\n                    \"prompt_tokens\": 1786,\n                    \"prompt_time\": 0.113688372,\n                    \"completion_tokens\": 64,\n                    \"completion_time\": 0.074189183,\n                    \"total_tokens\": 1850,\n                    \"total_time\": 0.187877555\n                },\n                \"usage_breakdown\": null,\n                \"system_fingerprint\": \"fp_77f8660d1d\",\n                \"x_groq\": {\n                    \"id\": \"req_01k6380dpmf95rq8f4yzqrppes\"\n                },\n                \"service_tier\": \"on_demand\"\n            },\n            \"id\": \"1363e62e-cc09-4603-87ac-0e2b72c2991a\"\n        }\n    }\n}"
+        },
+        {
+          "name": "Chat Copilot",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-session-id",
+                "value": "1005",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"and which month got the highest alert of this alert\"\r\n}   ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/chat",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "chat"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "x-custom-header",
+              "value": "this is custom header"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "999"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"3e7-un9bPJOcbbyju5QuYhccqT+FOak\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 26 Sep 2025 14:49:34 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"lc\": 1,\n        \"type\": \"constructor\",\n        \"id\": [\n            \"langchain_core\",\n            \"messages\",\n            \"AIMessage\"\n        ],\n        \"kwargs\": {\n            \"content\": \"The “Alarm set for Juniper device” alert peaked in **March\\u202f2025**, with **40,787 occurrences** during that month.\",\n            \"additional_kwargs\": {},\n            \"tool_calls\": [],\n            \"invalid_tool_calls\": [],\n            \"usage_metadata\": {\n                \"input_tokens\": 1786,\n                \"output_tokens\": 64,\n                \"total_tokens\": 1850\n            },\n            \"response_metadata\": {\n                \"tokenUsage\": {\n                    \"completionTokens\": 64,\n                    \"promptTokens\": 1786,\n                    \"totalTokens\": 1850\n                },\n                \"finish_reason\": \"stop\",\n                \"id\": \"chatcmpl-31d5e914-7b39-41a1-9a04-d6c0434c76e9\",\n                \"object\": \"chat.completion\",\n                \"created\": 1758898173,\n                \"model\": \"openai/gpt-oss-20b\",\n                \"usage\": {\n                    \"queue_time\": 0.044106178,\n                    \"prompt_tokens\": 1786,\n                    \"prompt_time\": 0.113688372,\n                    \"completion_tokens\": 64,\n                    \"completion_time\": 0.074189183,\n                    \"total_tokens\": 1850,\n                    \"total_time\": 0.187877555\n                },\n                \"usage_breakdown\": null,\n                \"system_fingerprint\": \"fp_77f8660d1d\",\n                \"x_groq\": {\n                    \"id\": \"req_01k6380dpmf95rq8f4yzqrppes\"\n                },\n                \"service_tier\": \"on_demand\"\n            },\n            \"id\": \"1363e62e-cc09-4603-87ac-0e2b72c2991a\"\n        }\n    }\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "ragBaseUrl",
+      "value": "",
+      "disabled": true
+    },
+    {
+      "key": "ragBaseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "accessToken",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyLmFkbWluIiwic3ViIjoxLCJlbWFpbCI6InN1cGVyLmFkbWluQGV4YW1wbGUuY29tIiwiaWF0IjoxNzY1MTI5NjM2LCJleHAiOjE3NjUxNzI4MzZ9.dVFduDoYL1wp53yATHqRSuZgsiHcKZPEg3lk5rgKSys"
+    }
+  ]
+}
