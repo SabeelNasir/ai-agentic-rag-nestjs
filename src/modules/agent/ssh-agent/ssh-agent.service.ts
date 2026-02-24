@@ -24,23 +24,33 @@ export class SshAgentService implements OnModuleInit {
     this.chatModel = this.chatModelService.getModel();
   }
 
-  async invoke(userPrompt: string, sessionId: string) {
+  async invoke(userPrompt: string, sessionId: string, context?: any) {
     const reactAgent = createReactAgent({
       llm: this.chatModel,
       tools: [this.sshAgentTools.toolConnectSsh(), this.sshAgentTools.toolRunSshCommand()],
     });
 
     // Bind session pg-memory
-    const pgMemoryService = new PgMemorySaverService(this.memoryService, sessionId);
-    const historyMsgs = await pgMemoryService.getMessages();
+    const msgService = new PgMemorySaverService(this.memoryService, sessionId, context?.userId, context?.applicationId);
+    const historyMsgs = await msgService.getMessages();
 
     const prompt = await this.prompts.sshOperations(userPrompt, historyMsgs);
 
-    const llmResp = await reactAgent.invoke({ messages: [...prompt] }, { recursionLimit: 25 });
+    const llmResp = await reactAgent.invoke(
+      { messages: [...prompt] },
+      {
+        recursionLimit: 25,
+        configurable: {
+          accessToken: context?.accessToken,
+          userId: context?.userId,
+          applicationId: context?.applicationId,
+        },
+      },
+    );
     const aiContent = extractLastAIMessage(llmResp.messages);
 
-    await pgMemoryService.addUserMessage(userPrompt);
-    await pgMemoryService.addAIChatMessage(aiContent?.toString()!);
+    await msgService.addUserMessage(userPrompt);
+    await msgService.addAIChatMessage(aiContent?.toString()!);
 
     return aiContent;
   }

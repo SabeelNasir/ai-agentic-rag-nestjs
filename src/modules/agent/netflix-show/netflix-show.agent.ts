@@ -37,12 +37,12 @@ export class NetflixShowAgent implements OnModuleInit {
     this.systemPrompt = new SystemMessage(NETFLIX_SHOW_SYSTEM_MESSAGE);
   }
 
-  async invoke(prompt: string, sessionId: string) {
+  async invoke(prompt: string, sessionId: string, context?: any) {
     const reactAgent = createReactAgent({
       llm: this.chatModel,
       tools: [this.toolService.getTool(), this.customWebsearchTool.getTool()],
     });
-    const msgService = new PgMemorySaverService(this.memoryService, sessionId);
+    const msgService = new PgMemorySaverService(this.memoryService, sessionId, context?.userId, context?.applicationId);
 
     const pastMessages = await msgService.getMessages();
 
@@ -50,7 +50,15 @@ export class NetflixShowAgent implements OnModuleInit {
       {
         messages: [this.systemPrompt, ...pastMessages, new HumanMessage(prompt)],
       },
-      { configurable: { thread_id: sessionId }, recursionLimit: 10 },
+      {
+        configurable: {
+          thread_id: sessionId,
+          accessToken: context?.accessToken,
+          userId: context?.userId,
+          applicationId: context?.applicationId,
+        },
+        recursionLimit: 10,
+      },
     );
     const aiContent = extractLastAIMessage(llmResp.messages);
     await msgService.addUserMessage(prompt);

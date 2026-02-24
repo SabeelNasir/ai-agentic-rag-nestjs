@@ -4,8 +4,8 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 @Entity()
 export class ChatModelLog {
   @PrimaryGeneratedColumn()
-  id: number; 
-  
+  id: number;
+
   @Column({ type: "enum", enum: ENUM_CHAT_MODEL_PROVIDER, nullable: true })
   model_provider: ENUM_CHAT_MODEL_PROVIDER;
 
@@ -29,6 +29,12 @@ export class ChatModelLog {
 
   @Column({ type: "numeric", default: 0 })
   cost: number;
+
+  @Column({ type: "int", nullable: true })
+  user_id: number;
+
+  @Column({ type: "int", nullable: true })
+  application_id: number;
 
   @Column({ type: "numeric", default: 0 })
   latency: number;

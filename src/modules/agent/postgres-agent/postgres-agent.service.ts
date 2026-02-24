@@ -32,14 +32,14 @@ export class PostgresAgentService implements OnModuleInit {
    * @param sessionId
    * @returns
    */
-  async invoke(userPrompt: string, sessionId: string) {
+  async invoke(userPrompt: string, sessionId: string, context?: any) {
     const reactAgent = createReactAgent({
       llm: this.chatModel,
       tools: [this.queryTools, this.listTablesTool, this.describeTableTool],
     });
 
-    const pgMemoryService = new PgMemorySaverService(this.memoryService, sessionId);
-    const historyMsgs = await pgMemoryService.getMessages();
+    const msgService = new PgMemorySaverService(this.memoryService, sessionId, context?.userId, context?.applicationId);
+    const historyMsgs = await msgService.getMessages();
 
     const prompt: BaseMessage[] = [
       new SystemMessage(`
@@ -49,11 +49,21 @@ export class PostgresAgentService implements OnModuleInit {
       ...historyMsgs,
       new HumanMessage(userPrompt),
     ];
-    const llmResp = await reactAgent.invoke({ messages: prompt }, { recursionLimit: 10 });
+    const llmResp = await reactAgent.invoke(
+      { messages: prompt },
+      {
+        recursionLimit: 10,
+        configurable: {
+          accessToken: context?.accessToken,
+          userId: context?.userId,
+          applicationId: context?.applicationId,
+        },
+      },
+    );
     const aiContent = extractLastAIMessage(llmResp.messages);
 
-    await pgMemoryService.addUserMessage(userPrompt);
-    await pgMemoryService.addAIChatMessage(aiContent?.toString()!);
+    await msgService.addUserMessage(userPrompt);
+    await msgService.addAIChatMessage(aiContent?.toString()!);
 
     return aiContent;
   }

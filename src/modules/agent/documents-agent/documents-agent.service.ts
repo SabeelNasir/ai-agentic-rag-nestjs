@@ -35,20 +35,30 @@ export class DocumentsAgentService implements OnModuleInit {
     this.chatModel = this.chatModelService.getModel();
   }
 
-  async invoke(userPrompt: string, sessionId: string) {
+  async invoke(userPrompt: string, sessionId: string, context?: any) {
     const reactAgent = createReactAgent({
       llm: this.chatModel,
       tools: [this.docsPgVectorTool.getTool(), this.websearchTool.getTool()],
     });
 
-    const pgMemoryService = new PgMemorySaverService(this.memoryService, sessionId);
-    const history = await pgMemoryService.getMessages();
+    const msgService = new PgMemorySaverService(this.memoryService, sessionId, context?.userId, context?.applicationId);
+    const history = await msgService.getMessages();
 
-    const result = await reactAgent.invoke({ messages: [this.systemPrompt, ...history, new HumanMessage(userPrompt)] });
+    const result = await reactAgent.invoke(
+      { messages: [this.systemPrompt, ...history, new HumanMessage(userPrompt)] },
+      {
+        configurable: {
+          thread_id: sessionId,
+          accessToken: context?.accessToken,
+          userId: context?.userId,
+          applicationId: context?.applicationId,
+        },
+      },
+    );
     const aiContent = extractLastAIMessage(result.messages);
 
-    await pgMemoryService.addUserMessage(userPrompt);
-    await pgMemoryService.addAIChatMessage(aiContent?.toString()!);
+    await msgService.addUserMessage(userPrompt);
+    await msgService.addAIChatMessage(aiContent?.toString()!);
 
     return aiContent;
   }

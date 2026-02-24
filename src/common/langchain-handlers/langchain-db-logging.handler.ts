@@ -18,6 +18,7 @@ export class DBLoggingHandler extends BaseCallbackHandler {
   }
   name = "DBLoggingHandler";
   private logger = new Logger("LLMChainLogging");
+  private runMetadataMap = new Map<string, any>();
 
   handleLLMStart(
     llm: Serialized,
@@ -29,7 +30,12 @@ export class DBLoggingHandler extends BaseCallbackHandler {
     metadata?: Record<string, unknown>,
     runName?: string,
   ) {
-    // console.log("ChatModel LLM Start:", metadata);
+    if (metadata) {
+      this.runMetadataMap.set(runId, {
+        user_id: metadata.userId,
+        application_id: metadata.applicationId,
+      });
+    }
   }
   async handleLLMEnd(
     output: LLMResult,
@@ -45,7 +51,15 @@ export class DBLoggingHandler extends BaseCallbackHandler {
     // console.log("Metadata", metadata);
 
     // Push in queue  for saving
-    await this.queueService.addJob({ model_provider: this.modelProvider, ...chatGen.message } as IChatModelLogJob);
+    const runCtx = this.runMetadataMap.get(runId);
+    await this.queueService.addJob({
+      model_provider: this.modelProvider,
+      user_id: runCtx?.user_id,
+      application_id: runCtx?.application_id,
+      ...chatGen.message,
+    } as IChatModelLogJob);
+
+    this.runMetadataMap.delete(runId); // Cleanup
   }
   handleToolStart(tool: Serialized, input: string) {
     this.logger.log("ToolStart: " + tool.name + " called, input: " + input.toString());

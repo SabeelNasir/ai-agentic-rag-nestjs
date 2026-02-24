@@ -1,4 +1,5 @@
 import { tool } from "@langchain/core/tools";
+import { RunnableConfig } from "@langchain/core/runnables";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { AiAgentToolEntity } from "src/database/entities/ai-agent-tool.entity";
@@ -72,7 +73,7 @@ export class AiAgentToolService {
     const argsSchema = z.object(schemaFields);
 
     // 🧠 2. Create dynamic tool function
-    const toolFunc = async (args: z.infer<typeof argsSchema>): Promise<string> => {
+    const toolFunc = async (args: z.infer<typeof argsSchema>, config: RunnableConfig): Promise<string> => {
       try {
         const url = new URL(item.config!.base_url!);
 
@@ -82,10 +83,25 @@ export class AiAgentToolService {
             url.searchParams.append(key, String(value));
           }
         }
-        console.log("url", url.toString());
+
+        // 🔍 Resolve Placeholders in Headers
+        const resolvedHeaders = { ...(item.config?.default_headers || {}) };
+        const accessToken = (config.configurable?.accessToken as string) || "";
+        const userId = (config.configurable?.userId as string | number) || "";
+        const clientToken = (config.configurable?.clientToken as string) || "";
+
+        for (const [key, value] of Object.entries(resolvedHeaders)) {
+          if (typeof value === "string") {
+            resolvedHeaders[key] = value
+              .replace(/{{USER_TOKEN}}/g, accessToken)
+              .replace(/{{USER_ID}}/g, String(userId))
+              .replace(/{{CLIENT_TOKEN}}/g, clientToken);
+          }
+        }
+        console.log("resolvedHeaders", resolvedHeaders);
 
         const resp = await axios.get(url.toString(), {
-          headers: item.config?.default_headers || {},
+          headers: resolvedHeaders,
           timeout: item.config?.timeout_ms || 10000,
           httpsAgent: new https.Agent({
             rejectUnauthorized: false, // ⛔ Disable SSL verification

@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Request as NestRequest, UseGuards, Headers } from "@nestjs/common";
 import { AiAgentService } from "./ai-agent.service";
 import { AiAgentEntity } from "src/database/entities/ai-agent.entity";
 import { DtoChatPayload } from "src/common/dto/chat-payload.dto";
+import { CompositeAuthGuard } from "../auth/composite-auth.guard";
 
 @Controller("ai-agents")
+@UseGuards(CompositeAuthGuard)
 export class AiAgentController {
   constructor(private readonly service: AiAgentService) {}
 
@@ -23,9 +25,18 @@ export class AiAgentController {
   }
 
   @Post("/:id/chat")
-  async chatWithAgent(@Param("id") id: number, @Body() payload: DtoChatPayload) {
+  async chatWithAgent(
+    @Param("id") id: number,
+    @Body() payload: DtoChatPayload,
+    @Headers("x-client-token") clientToken: string,
+    @Headers("authorization") authHeader: string,
+    @NestRequest() req: any,
+  ) {
     const sessionId = new Date().getTime().toString();
-    const aiMessage = await this.service.chatWithAgent(id, payload.prompt, sessionId);
+    const accessToken = authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : undefined;
+    const userId = req.user?.id;
+
+    const aiMessage = await this.service.chatWithAgent(id, payload.prompt, sessionId, clientToken, accessToken, userId);
     return {
       sessionId,
       response: aiMessage,
@@ -37,8 +48,14 @@ export class AiAgentController {
     @Param("id") id: number,
     @Body() payload: DtoChatPayload,
     @Param("sessionId") sessionId: string,
+    @Headers("x-client-token") clientToken: string,
+    @Headers("authorization") authHeader: string,
+    @NestRequest() req: any,
   ) {
-    const aiMessage = await this.service.chatWithAgent(id, payload.prompt, sessionId);
+    const accessToken = authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : undefined;
+    const userId = req.user?.id;
+
+    const aiMessage = await this.service.chatWithAgent(id, payload.prompt, sessionId, clientToken, accessToken, userId);
     return {
       sessionId,
       response: aiMessage,

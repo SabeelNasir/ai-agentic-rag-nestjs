@@ -16,6 +16,7 @@ import { SshAgentModule } from "./ssh-agent/ssh-agent.module";
 import { SshAgentService } from "./ssh-agent/ssh-agent.service";
 import { AgentController } from "./agent.controller";
 import { PostgresAgentModule } from "./postgres-agent/postgres-agent.module";
+import { ApplicationModule } from "../applications/application.module";
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { PostgresAgentModule } from "./postgres-agent/postgres-agent.module";
     DocumentsAgentModule,
     SshAgentModule,
     PostgresAgentModule,
+    ApplicationModule,
   ],
   providers: [AgentService, FoodGraphService],
   exports: [AgentService],

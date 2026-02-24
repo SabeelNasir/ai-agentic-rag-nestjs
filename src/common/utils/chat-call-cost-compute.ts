@@ -5,23 +5,10 @@ interface TokenUsage {
   provider: "openai" | "groq" | "unknown";
 }
 
-// Pricing table per 1K tokens
-const pricing: Record<string, { input: number; output: number }> = {
-  // ---- OpenAI examples ----
-  "gpt-4o": { input: 0.0025, output: 0.01 },
-  "gpt-4o-2024-08-06": { input: 0.0025, output: 0.01 },
-  "gpt-4o-mini-2024-07-18": { input: 0.00015, output: 0.0006 },
-  "gpt-4.1-2025-04-14": { input: 0.002, output: 0.008 },    
-  //   Input: $2.00 / 1,000,000 tokens = $0.002 per 1,000 tokens
-  //   Output: $8.00 / 1,000,000 tokens = $0.008 per 1,000 tokens
-
-  // ---- Groq examples ----
-  "qwen/qwen3-32b": { input: 0.000085, output: 0.000347 },
-  "openai/gpt-oss-120b": { input: 0.00015, output: 0.00075 },
-  "llama-3.1-8b-instant": { input: 0.00015, output: 0.00075 }
-};
-
-function computeCostFromMetadata(metadata: Record<string, any>): {
+function computeCostFromMetadata(
+  metadata: Record<string, any>,
+  price: { input: number; output: number } | null,
+): {
   provider: string;
   model: string;
   input_tokens: number;
@@ -35,11 +22,10 @@ function computeCostFromMetadata(metadata: Record<string, any>): {
     provider: "unknown",
   };
 
-  usage.input_tokens = metadata["tokenUsage"]["promptTokens"];
-  usage.output_tokens = metadata["tokenUsage"]["completionTokens"];
+  usage.input_tokens = metadata["tokenUsage"]?.["promptTokens"] || 0;
+  usage.output_tokens = metadata["tokenUsage"]?.["completionTokens"] || 0;
   usage.model = metadata.model || metadata.model_name;
 
-  const price = pricing[usage.model.toLowerCase()];
   if (!price) {
     return { ...usage, cost: 0 };
   }
@@ -49,7 +35,7 @@ function computeCostFromMetadata(metadata: Record<string, any>): {
 
   return {
     ...usage,
-    cost: parseFloat((inputCost + outputCost).toFixed(6)),
+    cost: parseFloat((inputCost + outputCost).toFixed(8)),
   };
 }
 

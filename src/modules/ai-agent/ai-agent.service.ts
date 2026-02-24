@@ -32,7 +32,14 @@ export class AiAgentService {
     return this.repo.findOne({ where: { id }, relations: this._singleRelations });
   }
 
-  async chatWithAgent(agentId: number, userPrompt: string, sessionId: string) {
+  async chatWithAgent(
+    agentId: number,
+    userPrompt: string,
+    sessionId: string,
+    clientToken?: string,
+    accessToken?: string,
+    userId?: number,
+  ) {
     const agentData = await this.findById(agentId);
     if (!agentData) {
       throw new Error("AI Agent not found!");
@@ -50,7 +57,15 @@ export class AiAgentService {
     });
     const llmResp = await reactAgent.invoke(
       { messages: [systemPrompt, ...historyMsgs, new HumanMessage(userPrompt)] },
-      { configurable: { thread_id: sessionId }, recursionLimit: 25 },
+      {
+        configurable: {
+          thread_id: sessionId,
+          clientToken,
+          accessToken,
+          userId,
+        },
+        recursionLimit: 25,
+      },
     );
     const lastAIMessage = extractLastAIMessage(llmResp.messages);
     await historyService.addUserMessage(userPrompt);

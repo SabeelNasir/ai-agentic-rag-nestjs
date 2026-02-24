@@ -28,6 +28,9 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { SshAgentModule } from "./modules/agent/ssh-agent/ssh-agent.module";
 import { VectorStoreModule } from "./modules/vector-store/vector-store.module";
 import { VectorStoreFileModule } from "./modules/vector-store-file/vector-store-file.module";
+import { ApplicationModule } from "./modules/applications/application.module";
+import { DashboardModule } from "./modules/dashboard/dashboard.module";
+import { ModelPricingModule } from "./common/pricing/model-pricing.module";
 
 @Module({
   imports: [
@@ -47,6 +50,8 @@ import { VectorStoreFileModule } from "./modules/vector-store-file/vector-store-
     UsersModule,
     AuthModule,
 
+    ModelPricingModule,
+
     //Shared Modules
     SharedModule,
     GroqChatModelModule,
@@ -61,6 +66,8 @@ import { VectorStoreFileModule } from "./modules/vector-store-file/vector-store-
     SshAgentModule,
     VectorStoreModule,
     VectorStoreFileModule,
+    ApplicationModule,
+    DashboardModule,
   ],
   controllers: [AppController, ChatModelLogController],
   providers: [AppService],

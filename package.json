@@ -63,6 +63,7 @@
     "multer": "^2.0.2",
     "node-ssh": "^13.2.1",
     "passport": "^0.7.0",
+    "passport-custom": "^1.1.1",
     "passport-jwt": "^4.0.1",
     "pdf-parse": "^1.1.1",
     "pg": "^8.16.3",

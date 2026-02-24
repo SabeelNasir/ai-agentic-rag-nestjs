@@ -8,10 +8,13 @@ import { AIMessage } from "@langchain/core/messages";
 import { EnvConfigService } from "src/config/env-config.service";
 import { computeCostFromMetadata } from "src/common/utils/chat-call-cost-compute";
 import { ChatModelLog } from "src/database/entities/chat-model-log.entity";
+import { ModelPricingService } from "src/common/pricing/model-pricing.service";
 
-export interface IChatModelLogJob extends AIMessage{
+export interface IChatModelLogJob extends AIMessage {
   model_provider: ENUM_CHAT_MODEL_PROVIDER;
   response_metadata: Record<string, any>;
+  user_id?: number;
+  application_id?: number;
 }
 
 @Injectable()
@@ -19,29 +22,35 @@ export class ChatModelLogsQueueService {
   constructor(
     @InjectQueue(ENUM_QUEUES.CHAT_MODEL_LOGGING) private queue: Queue,
     private configService: EnvConfigService,
+    private pricingService: ModelPricingService,
   ) {
     queuePool.add(queue);
   }
 
-  addJob(payload: IChatModelLogJob) {
+  async addJob(payload: IChatModelLogJob) {
     const respMetadata = payload.response_metadata;
+    const modelName = respMetadata.model || respMetadata.model_name;
+    const pricing = await this.pricingService.getPricing(modelName);
+
     const transformedPayload: Partial<ChatModelLog> = {
-      model_name: respMetadata.model || respMetadata.model_name,
+      model_name: modelName,
       model_provider: payload.model_provider,
-      input_tokens: respMetadata["tokenUsage"]["promptTokens"],
-      output_tokens: respMetadata["tokenUsage"]["completionTokens"],
-      latency: respMetadata['usage']['total_time'],
+      input_tokens: respMetadata["tokenUsage"]?.["promptTokens"] || 0,
+      output_tokens: respMetadata["tokenUsage"]?.["completionTokens"] || 0,
+      latency: respMetadata["usage"]?.["total_time"] || 0,
       request_id: ((respMetadata) => {
         try {
           return payload.model_provider == ENUM_CHAT_MODEL_PROVIDER.GROQ
-            ? respMetadata["x_groq"]["id"]
-            : respMetadata["x_openai"]["request_id"];
+            ? respMetadata["x_groq"]?.["id"]
+            : respMetadata["x_openai"]?.["request_id"];
         } catch (err) {
           return null;
         }
       })(respMetadata),
       response_code: 200,
-      cost: computeCostFromMetadata(respMetadata).cost,
+      cost: computeCostFromMetadata(respMetadata, pricing).cost,
+      user_id: payload.user_id,
+      application_id: payload.application_id,
     };
     return this.queue.add(transformedPayload);
   }
