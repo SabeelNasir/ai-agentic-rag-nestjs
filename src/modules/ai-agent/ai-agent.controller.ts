@@ -3,6 +3,7 @@ import { AiAgentService } from "./ai-agent.service";
 import { AiAgentEntity } from "src/database/entities/ai-agent.entity";
 import { DtoChatPayload } from "src/common/dto/chat-payload.dto";
 import { CompositeAuthGuard } from "../auth/composite-auth.guard";
+import { v4 as uuidv4 } from "uuid";
 
 @Controller("ai-agents")
 @UseGuards(CompositeAuthGuard)
@@ -32,7 +33,7 @@ export class AiAgentController {
     @Headers("authorization") authHeader: string,
     @NestRequest() req: any,
   ) {
-    const sessionId = new Date().getTime().toString();
+    const sessionId = uuidv4();
     const accessToken = authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : undefined;
     const userId = req.user?.id;
 
@@ -62,3 +63,4 @@ export class AiAgentController {
     };
   }
 }
+
