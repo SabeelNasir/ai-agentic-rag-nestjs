@@ -12,23 +12,48 @@ export class CompositeAuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const jwtGuard = new JwtAuthGuard();
     const apiKeyGuard = new ApiKeyAuthGuard();
+    const request = context.switchToHttp().getRequest();
+
+    let jwtUser: any = null;
+    let apiKeyUser: any = null;
 
     // Try JWT first
     try {
       const jwtResult = await jwtGuard.canActivate(context);
-      if (jwtResult) return true;
+      if (jwtResult) {
+        jwtUser = request.user;
+      }
     } catch (_jwtError) {
-      // JWT failed, try API key
+      // JWT failed
     }
 
-    // Fallback to API-Key
+    // Try API-Key
     try {
       const apiKeyResult = await apiKeyGuard.canActivate(context);
-      if (apiKeyResult) return true;
+      if (apiKeyResult) {
+        apiKeyUser = request.user;
+      }
     } catch (_apiKeyError) {
-      // Both strategies failed
+      // API Key failed
     }
 
-    throw new UnauthorizedException("Authentication required. Provide a valid JWT token or API key.");
+    if (!jwtUser && !apiKeyUser) {
+      throw new UnauthorizedException("Authentication required. Provide a valid JWT token or API key.");
+    }
+
+    // Merge logic: Prioritize JWT user identity but add application info from API Key if available
+    if (jwtUser && apiKeyUser) {
+      request.user = {
+        ...jwtUser,
+        applicationId: apiKeyUser.applicationId,
+        applicationName: apiKeyUser.applicationName,
+      };
+    } else if (jwtUser) {
+      request.user = jwtUser;
+    } else {
+      request.user = apiKeyUser;
+    }
+
+    return true;
   }
 }

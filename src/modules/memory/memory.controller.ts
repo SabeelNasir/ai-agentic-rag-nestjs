@@ -1,4 +1,16 @@
-import { Controller, Get, Post, Patch, Delete, Query, Param, Body, UseGuards, Request } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Query,
+  Param,
+  Body,
+  UseGuards,
+  Request,
+  BadRequestException,
+} from "@nestjs/common";
 import { MemoryService } from "./memory.service";
 import { CompositeAuthGuard } from "../auth/composite-auth.guard";
 
@@ -8,12 +20,20 @@ export class MemoryController {
   constructor(private readonly memoryService: MemoryService) {}
 
   /**
-   * GET /memory/sessions?applicationId=3
+   * GET /memory/sessions
    * Returns all chat sessions for the current user + application.
    */
   @Get("sessions")
-  async getSessions(@Request() req, @Query("applicationId") applicationId: number) {
+  async getSessions(@Request() req) {
     const userId = req.user.id;
+    const applicationId = req.user.applicationId;
+
+    if (!applicationId) {
+      throw new BadRequestException(
+        "Application ID is required but was not found in the context. Did you provide a valid API key?",
+      );
+    }
+
     const sessions = await this.memoryService.getSessionsByUserId(userId, applicationId);
     return sessions.map((s) => ({
       sessionId: s.id,
@@ -25,12 +45,20 @@ export class MemoryController {
 
   /**
    * POST /memory/sessions
-   * Create a new chat session. Body: { applicationId, agentId? }
+   * Create a new chat session. Body: { agentId? }
    */
   @Post("sessions")
-  async createSession(@Request() req, @Body() body: { applicationId: number; agentId?: number }) {
+  async createSession(@Request() req, @Body() body: { agentId?: number }) {
     const userId = req.user.id;
-    const session = await this.memoryService.createSession(userId, body.applicationId, body.agentId);
+    const applicationId = req.user.applicationId;
+
+    if (!applicationId) {
+      throw new BadRequestException(
+        "Application ID is required but was not found in the context. Did you provide a valid API key?",
+      );
+    }
+
+    const session = await this.memoryService.createSession(userId, applicationId, body.agentId);
     return {
       sessionId: session.id,
       title: session.title,
